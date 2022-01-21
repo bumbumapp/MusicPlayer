@@ -43,16 +43,12 @@
     <string name="lbl_save">Opslaan</string>
     <string name="lbl_no_dirs">Geen Mappen</string>
 
-    <string name="lbl_about">Over</string>
-    <string name="lbl_version">Versie</string>
-    <string name="lbl_code">Bekijken op GitHub</string>
-    <string name="lbl_faq">FAQ</string>
-    <string name="lbl_licenses">Licenties</string>
-    <string name="lbl_author">Ontwikkeld door OxygenCobalt</string>
+
 
     <!-- Settings namespace | Settings-related labels -->
     <string name="set_title">Instellingen</string>
-
+    <string name="use_add_audio">Gebruik het toevoegen van audionummers</string>
+    <string name="add_audio">Audio toevoegen</string>
     <string name="set_ui">Uiterlijk</string>
     <string name="set_theme">Thema</string>
     <string name="set_theme_auto">Automatisch</string>

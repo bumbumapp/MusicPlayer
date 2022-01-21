@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Info namespace | App labels -->
-    <string name="info_app_name" translatable="false">Auxio</string>
+    <string name="info_app_name" translatable="false">Music player</string>
 
     <!-- Format Namespace | Value formatting/plurals -->
     <string name="fmt_two" translatable="false">%1$s • %2$s</string>

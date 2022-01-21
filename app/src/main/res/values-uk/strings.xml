@@ -28,11 +28,7 @@
     <string name="lbl_go_artist">Перейти до виконавця</string>
     <string name="lbl_go_album">Перейти до альбому</string>
 
-    <string name="lbl_about">Про програму</string>
-    <string name="lbl_version">Версія</string>
-    <string name="lbl_code">Переглянути на GitHub</string>
-    <string name="lbl_faq">ЧаП</string>
-    <string name="lbl_licenses">Ліцензії</string>
+
 
     <!-- Settings namespace | Settings-related labels -->
     <string name="set_title">Налаштування</string>
@@ -45,7 +41,8 @@
     <string name="set_quality_covers">Ігнорувати обкладинки з Медіасховища</string>
 
     <string name="set_audio">Аудіо</string>
-
+    <string name="use_add_audio">Використовуйте додавання аудіопісень</string>
+    <string name="add_audio">Додайте аудіо</string>
     <string name="set_behavior">Поведінка</string>
 
     <!-- Error Namespace | Error Labels -->

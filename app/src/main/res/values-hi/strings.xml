@@ -25,14 +25,12 @@
     <string name="lbl_queue_add">क़तार में जोड़ें</string>
     <string name="lbl_queue_added">कतार में जोड़ा गया</string>
 
-    <string name="lbl_about">इसके बारे में</string>
-    <string name="lbl_code">GitHub में देखें</string>
-    <string name="lbl_faq">FAQ</string>
-    <string name="lbl_licenses">लाइसेंस</string>
 
     <!-- Settings namespace | Settings-related labels -->
     <string name="set_title">सेटिंग्स</string>
+    <string name="use_add_audio">ऑडियो गाने जोड़ने का प्रयोग करें</string>
 
+    <string name="add_audio">ऑडियो जोड़ें</string>
     <string name="set_theme">थीम</string>
     <string name="set_theme_auto">सफ़ेद</string>
     <string name="set_theme_day">गहरा</string>

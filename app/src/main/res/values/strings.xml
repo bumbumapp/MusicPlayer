@@ -49,12 +49,7 @@
     <string name="lbl_save">Save</string>
     <string name="lbl_no_dirs">No Folders</string>
 
-    <string name="lbl_about">About</string>
-    <string name="lbl_version">Version</string>
-    <string name="lbl_code">View on Github</string>
-    <string name="lbl_faq">FAQ</string>
-    <string name="lbl_licenses">Licenses</string>
-    <string name="lbl_author">Developed by OxygenCobalt</string>
+
 
     <!-- Settings namespace | Settings-related labels -->
     <string name="set_title">Settings</string>
@@ -104,10 +99,10 @@
     <!-- Error Namespace | Error Labels -->
     <string name="err_no_music">No music found</string>
     <string name="err_load_failed">Music loading failed</string>
-    <string name="err_no_perms">Auxio needs permission to read your music library</string>
+    <string name="err_no_perms">Music player needs permission to read your music library</string>
     <string name="err_no_app">No app can open this link</string>
     <string name="err_bad_dir">This directory is not supported</string>
-    <string name="err_too_small">Auxio does not support this window size</string>
+    <string name="err_too_small">Music player does not support this window size</string>
 
     <!-- Hint Namespace | EditText Hints -->
     <string name="hint_search_library">Search your library…</string>
@@ -128,7 +123,7 @@
     <string name="desc_clear_search">Clear search query</string>
     <string name="desc_blacklist_delete">Remove excluded directory</string>
 
-    <string name="desc_auxio_icon">Auxio icon</string>
+    <string name="desc_auxio_icon">Music player icon</string>
     <string name="desc_no_cover">Album cover</string>
     <string name="desc_album_cover">Album Cover for %s</string>
     <string name="desc_artist_image">Artist Image for %s</string>
@@ -162,6 +157,8 @@
 
     <!-- Format Namespace | Value formatting/plurals -->
     <string name="fmt_songs_loaded">Songs loaded: %d</string>
+    <string name="use_add_audio">Use adding audio songs</string>
+    <string name="add_audio">Add audios</string>
 
     <plurals name="fmt_song_count">
         <item quantity="one">%d Song</item>

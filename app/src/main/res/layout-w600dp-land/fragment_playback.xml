@@ -8,15 +8,15 @@
 
         <variable
             name="song"
-            type="org.oxycblt.auxio.music.Song" />
+            type="org.bumbumapps.musicplayer.music.Song" />
 
         <variable
             name="playbackModel"
-            type="org.oxycblt.auxio.playback.PlaybackViewModel" />
+            type="org.bumbumapps.musicplayer.playback.PlaybackViewModel" />
 
         <variable
             name="detailModel"
-            type="org.oxycblt.auxio.detail.DetailViewModel" />
+            type="org.bumbumapps.musicplayer.detail.DetailViewModel" />
     </data>
 
 
@@ -104,7 +104,7 @@
             tools:text="Album Name" />
 
 
-        <org.oxycblt.auxio.playback.PlaybackSeekBar
+        <org.bumbumapps.musicplayer.playback.PlaybackSeekBar
             android:id="@+id/playback_seek_bar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

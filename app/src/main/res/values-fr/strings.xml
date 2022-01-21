@@ -29,12 +29,7 @@
     <string name="lbl_go_album">Aller à l\'album</string>
     <string name="lbl_go_artist">Aller à l\'artiste</string>
 
-    <string name="lbl_about">À propos</string>
-    <string name="lbl_version">Version</string>
-    <string name="lbl_code">Voir sur GitHub</string>
-    <string name="lbl_faq">FAQ</string>
-    <string name="lbl_licenses">Licences</string>
-    <string name="lbl_author">Développé par OxygenCobalt</string>
+
 
     <!-- Settings namespace | Settings-related labels -->
     <string name="set_title">Paramètres</string>
@@ -53,6 +48,9 @@
     <string name="set_plug_mgt">Branchement du casque</string>
 
     <string name="set_behavior">Comportement</string>
+    <string name="use_add_audio">"Utiliser l'ajout de chansons audio"</string>
+
+    <string name="add_audio">Ajouter des sons</string>
 
     <!-- Error Namespace | Error Labels -->
     <string name="err_no_music">Pas de musique trouvée</string>

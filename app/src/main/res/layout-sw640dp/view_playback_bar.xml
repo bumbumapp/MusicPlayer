@@ -8,7 +8,7 @@
 
         <variable
             name="song"
-            type="org.oxycblt.auxio.music.Song" />
+            type="org.bumbumapps.musicplayer.music.Song" />
 
     </data>
 

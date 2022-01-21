@@ -22,5 +22,5 @@
 
 -dontobfuscate
 
--keep class org.oxycblt.auxio.AuxioApp
--keep class org.oxycblt.auxio.settings.SettingsListFragment
+-keep class org.bumbumapps.musicplayer.AuxioApp
+-keep class org.bumbumapps.musicplayer.settings.SettingsListFragment

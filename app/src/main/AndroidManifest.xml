@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="org.oxycblt.auxio">
-
+    package="org.bumbumapps.musicplayer">
+   <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -15,21 +15,21 @@
     <queries />
 
     <application
-        android:name=".AuxioApp"
+        android:name="org.bumbumapps.musicplayer.AuxioApp"
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_descriptor"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/musicplayer"
         android:label="@string/info_app_name"
-        android:roundIcon="@mipmap/ic_launcher"
+        android:roundIcon="@drawable/musicplayer"
         android:supportsRtl="true"
         android:theme="@style/Theme.Auxio.App">
 
         <activity
-            android:name=".MainActivity"
+            android:name="org.bumbumapps.musicplayer.MainActivity"
             android:exported="true"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/musicplayer"
             android:launchMode="singleTask"
-            android:roundIcon="@mipmap/ic_launcher"
+            android:roundIcon="@drawable/musicplayer"
             android:windowSoftInputMode="adjustPan">
 
             <intent-filter>
@@ -51,13 +51,13 @@
         </activity>
 
         <service
-            android:name=".playback.system.PlaybackService"
+            android:name="org.bumbumapps.musicplayer.playback.system.PlaybackService"
             android:foregroundServiceType="mediaPlayback"
-            android:icon="@mipmap/ic_launcher"
-            android:roundIcon="@mipmap/ic_launcher" />
+            android:icon="@drawable/musicplayer"
+            android:roundIcon="@drawable/musicplayer" />
 
         <receiver
-            android:name=".widgets.WidgetProvider"
+            android:name="org.bumbumapps.musicplayer.widgets.WidgetProvider"
             android:exported="false"
             android:label="@string/lbl_playback">
 
@@ -69,5 +69,8 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_info" />
         </receiver>
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-8405656592612252~6187263152"/>
     </application>
 </manifest>

@@ -4,15 +4,6 @@
         app:layout="@layout/item_header"
         app:title="@string/set_ui">
 
-        <org.oxycblt.auxio.settings.pref.IntListPreference
-            app:defaultValue="@integer/theme_auto"
-            app:isPreferenceVisible="@bool/enable_theme_settings"
-            app:entries="@array/entires_theme"
-            app:entryValues="@array/values_theme"
-            app:icon="@drawable/ic_day"
-            app:iconSpaceReserved="false"
-            app:key="KEY_THEME2"
-            app:title="@string/set_theme" />
 
         <Preference
             app:isPreferenceVisible="@bool/enable_theme_settings"
@@ -27,6 +18,7 @@
             app:key="KEY_BLACK_THEME"
             app:summary="@string/set_black_mode_desc"
             app:title="@string/set_black_mode" />
+
 
     </PreferenceCategory>
 
@@ -77,7 +69,13 @@
     <PreferenceCategory
         app:layout="@layout/item_header"
         app:title="@string/set_audio">
-
+        <SwitchPreferenceCompat
+            app:allowDividerBelow="false"
+            app:defaultValue="false"
+            app:iconSpaceReserved="false"
+            app:key="KEY_ADD_AUDIO"
+            app:summary="@string/use_add_audio"
+            app:title="@string/add_audio" />
         <SwitchPreferenceCompat
             app:defaultValue="true"
             app:iconSpaceReserved="false"
@@ -99,7 +97,7 @@
         app:layout="@layout/item_header"
         app:title="@string/set_behavior">
 
-        <org.oxycblt.auxio.settings.pref.IntListPreference
+        <org.bumbumapps.musicplayer.settings.pref.IntListPreference
             app:defaultValue="@integer/play_mode_songs"
             app:entries="@array/entries_song_playback_mode"
             app:entryValues="@array/values_song_playback_mode"

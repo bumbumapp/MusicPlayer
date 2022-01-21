@@ -8,20 +8,29 @@
 
         <variable
             name="genre"
-            type="org.oxycblt.auxio.music.Genre" />
+            type="org.bumbumapps.musicplayer.music.Genre" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout style="@style/Widget.Auxio.ItemLayout">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_cover"
+            style="@style/Widget.Auxio.Image.Small"
+            app:cardCornerRadius="50dp"
+            android:outlineSpotShadowColor="@android:color/transparent"
+            android:outlineAmbientShadowColor="@android:color/transparent"
+            tools:ignore="MissingConstraints">
+            <ImageView
+                android:id="@+id/genre_image"
+                style="@style/Widget.Auxio.Image.Medium"
+                android:contentDescription="@{@string/desc_genre_image(genre.resolvedName)}"
+                app:genreImage="@{genre}"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_genre" />
+        </androidx.cardview.widget.CardView>
 
-        <ImageView
-            android:id="@+id/genre_image"
-            style="@style/Widget.Auxio.Image.Medium"
-            android:contentDescription="@{@string/desc_genre_image(genre.resolvedName)}"
-            app:genreImage="@{genre}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_genre" />
 
         <TextView
             android:id="@+id/genre_name"
@@ -31,7 +40,7 @@
             android:text="@{genre.resolvedName}"
             app:layout_constraintBottom_toTopOf="@+id/genre_count"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/genre_image"
+            app:layout_constraintStart_toEndOf="@+id/card_view_cover"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="Genre Name" />
@@ -44,7 +53,7 @@
             android:text="@{@plurals/fmt_song_count(genre.songs.size(), genre.songs.size())}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/genre_image"
+            app:layout_constraintStart_toEndOf="@+id/card_view_cover"
             app:layout_constraintTop_toBottomOf="@+id/genre_name"
             tools:text="40 Songs" />
 

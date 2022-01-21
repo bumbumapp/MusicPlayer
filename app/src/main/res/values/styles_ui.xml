@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- SHARED RE-USABLE UI STYLES -->
 
     <!-- Base toolbar style -->
@@ -24,11 +24,16 @@
         <item name="android:layout_height">@dimen/size_cover_compact</item>
     </style>
 
+
     <style name="Widget.Auxio.Image.Medium" parent="">
         <item name="android:layout_width">@dimen/size_cover_normal</item>
         <item name="android:layout_height">@dimen/size_cover_normal</item>
+        <item name="android:radius">50dp </item>
     </style>
-
+    <style name="Widget.Auxio.Image.Full." parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
     <style name="Widget.Auxio.Image.Large" parent="">
         <item name="android:layout_width">@dimen/size_cover_large</item>
         <item name="android:layout_height">@dimen/size_cover_large</item>

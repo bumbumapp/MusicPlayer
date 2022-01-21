@@ -28,11 +28,6 @@
     <string name="lbl_go_artist">Πήγαινε στον καλλιτέχνη</string>
     <string name="lbl_go_album">Πήγαινε στο άλμπουμ</string>
 
-    <string name="lbl_about">Σχετικά με</string>
-    <string name="lbl_version">Έκδοση</string>
-    <string name="lbl_code">Δείτε το στο GitHub</string>
-    <string name="lbl_faq">FAQ</string>
-    <string name="lbl_licenses">Άδειες</string>
 
     <!-- Settings namespace | Settings-related labels -->
     <string name="set_title">Ρυθμίσεις</string>
@@ -43,7 +38,9 @@
     <string name="set_theme_day">Φωτεινό</string>
     <string name="set_theme_night">Σκοτεινό</string>
     <string name="set_accent">Χρώμα χαρακτήρων</string>
+    <string name="use_add_audio">Χρησιμοποιήστε την προσθήκη τραγουδιών ήχου</string>
 
+    <string name="add_audio">Προσθήκη ήχου</string>
     <string name="set_quality_covers">Παράληψη των Media Store εξωφύλλων</string>
 
     <string name="set_audio">Ήχος</string>

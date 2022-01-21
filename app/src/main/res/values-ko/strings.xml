@@ -29,10 +29,7 @@
     <string name="lbl_go_artist">아티스트로 가기</string>
     <string name="lbl_go_album">앨범으로 가기</string>
 
-    <string name="lbl_about">정보</string>
-    <string name="lbl_version">버전</string>
-    <string name="lbl_code">GitHub에서 보기</string>
-    <string name="lbl_licenses">라이선스</string>
+
 
     <!-- Settings namespace | Settings-related labels -->
     <string name="set_title">설정</string>
@@ -43,7 +40,8 @@
     <string name="set_theme_day">밝은 테마</string>
     <string name="set_theme_night">어두운 테마</string>
     <string name="set_accent">강조</string>
-
+    <string name="use_add_audio">오디오 노래 추가 사용</string>
+    <string name="add_audio">오디오 추가</string>
     <string name="set_quality_covers">미디어 스토어 앨범 커버 무시</string>
 
     <string name="set_audio">오디오</string>

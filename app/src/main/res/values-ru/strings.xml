@@ -49,14 +49,11 @@
     <string name="lbl_save">Сохранить</string>
     <string name="lbl_no_dirs">Папки отсутствуют</string>
 
-    <string name="lbl_about">О программе</string>
-    <string name="lbl_version">Версия</string>
-    <string name="lbl_code">Открыть на GitHub</string>
-    <string name="lbl_faq">ЧаВО</string>
-    <string name="lbl_licenses">Лицензии</string>
-    <string name="lbl_author">Разработано OxygenCobalt</string>
+
 
     <!-- Settings namespace | Settings-related labels -->
+    <string name="use_add_audio">Используйте добавление аудио-песен</string>
+    <string name="add_audio">Добавить аудио</string>
     <string name="set_title">Настройки</string>
     <string name="set_ui">Внешний вид</string>
     <string name="set_theme">Тема</string>

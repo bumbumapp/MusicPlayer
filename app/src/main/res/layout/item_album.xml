@@ -8,20 +8,29 @@
 
         <variable
             name="album"
-            type="org.oxycblt.auxio.music.Album" />
+            type="org.bumbumapps.musicplayer.music.Album" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout style="@style/Widget.Auxio.ItemLayout">
-
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_cover"
+        style="@style/Widget.Auxio.Image.Small"
+        app:cardCornerRadius="50dp"
+        android:outlineSpotShadowColor="@android:color/transparent"
+        android:outlineAmbientShadowColor="@android:color/transparent"
+        tools:ignore="MissingConstraints">
         <ImageView
             android:id="@+id/album_cover"
-            style="@style/Widget.Auxio.Image.Medium"
+            style="@style/Widget.Auxio.Image.Small"
             android:contentDescription="@{@string/desc_album_cover(album.name)}"
             app:albumArt="@{album}"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_album" />
+    </androidx.cardview.widget.CardView>
+
 
         <TextView
             android:id="@+id/album_name"
@@ -31,7 +40,7 @@
             android:text="@{album.name}"
             app:layout_constraintBottom_toTopOf="@+id/album_info"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/album_cover"
+            app:layout_constraintStart_toEndOf="@+id/card_view_cover"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="Album Name" />
@@ -44,7 +53,7 @@
             android:text="@{@string/fmt_two(album.artist.resolvedName, @plurals/fmt_song_count(album.songs.size, album.songs.size))}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/album_cover"
+            app:layout_constraintStart_toEndOf="@+id/card_view_cover"
             app:layout_constraintTop_toBottomOf="@+id/album_name"
             tools:text="Artist / 10 Songs" />
     </androidx.constraintlayout.widget.ConstraintLayout>

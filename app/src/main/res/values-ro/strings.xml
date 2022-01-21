@@ -29,16 +29,12 @@
     <string name="lbl_go_artist">Accesaţi artistul</string>
     <string name="lbl_go_album">Accesaţi albumul</string>
 
-    <string name="lbl_about">Despre</string>
-    <string name="lbl_version">Versiune</string>
-    <string name="lbl_code">Vedeți pe GitHub</string>
-    <string name="lbl_faq">FAQ</string>
-    <string name="lbl_licenses">Licențe</string>
-    <string name="lbl_author">Dezvoltat de OxygenCobalt</string>
+
 
     <!-- Settings namespace | Settings-related labels -->
     <string name="set_title">Setări</string>
-
+    <string name="use_add_audio">Utilizați adăugarea de melodii audio</string>
+    <string name="add_audio">Adăugați audio</string>
     <string name="set_ui">Aspect</string>
     <string name="set_theme">Temă</string>
     <string name="set_theme_auto">Automatică</string>

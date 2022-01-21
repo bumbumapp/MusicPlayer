@@ -28,12 +28,7 @@
     <string name="lbl_go_artist">Ir para o artista</string>
     <string name="lbl_go_album">Ir para o álbum</string>
 
-    <string name="lbl_about">Sobre</string>
-    <string name="lbl_version">Versão</string>
-    <string name="lbl_code">Ver no GitHub</string>
-    <string name="lbl_faq">FAQ</string>
-    <string name="lbl_licenses">Licenças</string>
-    <string name="lbl_author">Desenvolvido por OxygenCobalt</string>
+
 
     <!-- Settings namespace | Settings-related labels -->
     <string name="set_title">Configurações</string>
@@ -50,7 +45,8 @@
     <string name="set_audio">Áudio</string>
     <string name="set_focus">Foco do áudio</string>
     <string name="set_plug_mgt">Entrada do fone de ouvido</string>
-
+    <string name="use_add_audio">Use a adição de músicas de áudio</string>
+    <string name="add_audio">Adicionar áudios</string>
     <string name="set_behavior">Comportamento</string>
     <string name="set_keep_shuffle">Memorizar aleatorização</string>
 

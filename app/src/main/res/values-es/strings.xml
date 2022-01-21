@@ -43,12 +43,7 @@
     <string name="lbl_save">Guardar</string>
     <string name="lbl_no_dirs">No hay carpetas</string>
 
-    <string name="lbl_about">Acerca de</string>
-    <string name="lbl_version">Versión</string>
-    <string name="lbl_code">Ver en Github</string>
-    <string name="lbl_faq">FAQ</string>
-    <string name="lbl_licenses">Licencias</string>
-    <string name="lbl_author">Desarrollado por OxygenCobalt</string>
+
 
     <!-- Settings namespace | Settings-related labels -->
     <string name="set_title">Preferencias</string>
@@ -93,7 +88,7 @@
     <!-- Error Namespace | Error Labels -->
     <string name="err_no_music">No se encontró música</string>
     <string name="err_load_failed">Error al cargar música</string>
-    <string name="err_no_perms">Auxio necesita permiso para leer tu biblioteca musical</string>
+    <string name="err_no_perms">Music player necesita permiso para leer tu biblioteca musical</string>
     <string name="err_no_app">Ninguna aplicación puede abrir este enlace</string>
     <string name="err_bad_dir">Este directorio no es compatible</string>
 
@@ -111,11 +106,13 @@
     <string name="desc_clear_search">Borrar historial de búsqueda</string>
     <string name="desc_blacklist_delete">Eliminar directorio excluido</string>
 
-    <string name="desc_auxio_icon">Auxio icon</string>
+    <string name="desc_auxio_icon">Music player icon</string>
     <string name="desc_album_cover">Carátula de álbum para %s</string>
     <string name="desc_artist_image">Imagen de artista para %s</string>
     <string name="desc_genre_image">Imagen de género para %s</string>
+    <string name="use_add_audio">Utilice la adición de canciones de audio</string>
 
+    <string name="add_audio">Agregar audios</string>
     <!-- Placeholder Namespace | Placeholder values -->
     <string name="def_genre">Género desconocido</string>
     <string name="def_date">Sin fecha</string>

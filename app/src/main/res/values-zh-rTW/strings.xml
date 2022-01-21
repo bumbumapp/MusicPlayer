@@ -29,10 +29,7 @@
     <string name="lbl_go_artist">前往該歌手頁面</string>
     <string name="lbl_go_album">專輯</string>
 
-    <string name="lbl_about">關於</string>
-    <string name="lbl_version">版本</string>
-    <string name="lbl_code">在 GitHub 上檢視</string>
-    <string name="lbl_licenses">授權條款</string>
+
 
     <!-- Settings namespace | Settings-related labels -->
     <string name="set_title">設定</string>
@@ -52,7 +49,8 @@
 
     <string name="set_behavior">行為</string>
     <string name="set_keep_shuffle">記住隨機播放</string>
-
+    <string name="use_add_audio">使用添加音頻歌曲</string>
+    <string name="add_audio">添加音頻</string>
     <!-- Error Namespace | Error Labels -->
     <string name="err_no_music">找不到音樂</string>
 

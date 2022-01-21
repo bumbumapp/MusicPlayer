@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <org.oxycblt.auxio.playback.PlaybackLayout
+        <org.bumbumapps.musicplayer.playback.PlaybackLayout
             android:id="@+id/playback_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -21,7 +21,7 @@
                 app:navGraph="@navigation/nav_explore"
                 tools:layout="@layout/fragment_home" />
 
-        </org.oxycblt.auxio.playback.PlaybackLayout>
+        </org.bumbumapps.musicplayer.playback.PlaybackLayout>
 
         <FrameLayout
             android:id="@+id/layout_too_small"

@@ -8,7 +8,7 @@
 
         <variable
             name="album"
-            type="org.oxycblt.auxio.music.Album" />
+            type="org.bumbumapps.musicplayer.music.Album" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout style="@style/Widget.Auxio.ItemLayout">

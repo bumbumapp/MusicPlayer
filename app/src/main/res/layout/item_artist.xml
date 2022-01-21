@@ -8,20 +8,29 @@
 
         <variable
             name="artist"
-            type="org.oxycblt.auxio.music.Artist" />
+            type="org.bumbumapps.musicplayer.music.Artist" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout style="@style/Widget.Auxio.ItemLayout">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_cover"
+            style="@style/Widget.Auxio.Image.Small"
+            app:cardCornerRadius="50dp"
+            android:outlineSpotShadowColor="@android:color/transparent"
+            android:outlineAmbientShadowColor="@android:color/transparent"
+            tools:ignore="MissingConstraints">
+            <ImageView
+                android:id="@+id/artist_image"
+                style="@style/Widget.Auxio.Image.Medium"
+                android:contentDescription="@{@string/desc_artist_image(artist.resolvedName)}"
+                app:artistImage="@{artist}"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_artist" />
 
-        <ImageView
-            android:id="@+id/artist_image"
-            style="@style/Widget.Auxio.Image.Medium"
-            android:contentDescription="@{@string/desc_artist_image(artist.resolvedName)}"
-            app:artistImage="@{artist}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_artist" />
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/artist_name"
@@ -31,7 +40,7 @@
             android:text="@{artist.resolvedName}"
             app:layout_constraintBottom_toTopOf="@+id/artist_details"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/artist_image"
+            app:layout_constraintStart_toEndOf="@+id/card_view_cover"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="Artist Name" />
@@ -44,7 +53,7 @@
             app:artistCounts="@{artist}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/artist_image"
+            app:layout_constraintStart_toEndOf="@+id/card_view_cover"
             app:layout_constraintTop_toBottomOf="@+id/artist_name"
             tools:text="2 Albums, 20 Songs" />
 

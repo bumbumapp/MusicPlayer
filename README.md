@@ -12,7 +12,7 @@
 </p>
 <h4 align="center"><a href="/info/FAQ.md">FAQ</a> | <a href="/info/LICENSES.md">Licenses</a> | <a href="/.github/CONTRIBUTING.md">Contributing</a> | <a href="/info/ARCHITECTURE.md">Architecture</a></h4> 
 <p align="center">
-    <a href="https://f-droid.org/app/org.oxycblt.auxio"><img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" width="170"></a>
+    <a href="https://f-droid.org/app/org.bumbumapps.musicplayer"><img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" width="170"></a>
 </p>
 
 ## About
