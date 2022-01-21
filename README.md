@@ -19,7 +19,6 @@
 
 Auxio is a local music player with a fast, reliable UI/UX without the many useless features present in other music players. Built off of <a href="https://exoplayer.dev/">Exoplayer</a>, Auxio has a much better listening experience compared to other apps that use the native MediaPlayer API. In short, **It plays music.**
 
-I primarily built Auxio for myself, but you can use it too, I guess.
 
 ## Screenshots
 
