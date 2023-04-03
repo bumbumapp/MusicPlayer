@@ -16,7 +16,9 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.color.MaterialColors
+import org.bumbumapps.musicplayer.Globals
 import org.bumbumapps.musicplayer.R
+import org.bumbumapps.musicplayer.Timers
 import org.bumbumapps.musicplayer.databinding.ViewPlaybackBarBinding
 import org.bumbumapps.musicplayer.detail.DetailViewModel
 import org.bumbumapps.musicplayer.music.Song
@@ -42,7 +44,7 @@ class PlaybackBarView @JvmOverloads constructor(
 
     init {
         id = R.id.playback_bar
-        scheduleInterstitial()
+        setUpInterstitialAd()
         // Deliberately override the progress bar color [in a Lollipop-friendly way] so that
         // we use colorSecondary instead of colorSurfaceVariant. This is for two reasons:
         // 1. colorSurfaceVariant is used with the assumption that the view that is using it
@@ -77,12 +79,16 @@ class PlaybackBarView @JvmOverloads constructor(
 
         binding.playbackPlayPause.setOnClickListener {
 
-            if (mInterstitialAd != null) {
-                mInterstitialAd!!.show(context as Activity)
-                mInterstitialAd!!.setFullScreenContentCallback(object :
+            if (Globals.TIMER_FINISHED){
+                if (mInterstitialAd != null) {
+                    mInterstitialAd!!.show(context as Activity)
+                    mInterstitialAd!!.fullScreenContentCallback = object :
                         FullScreenContentCallback() {
                         override fun onAdDismissedFullScreenContent() {
                             playbackModel.invertPlayingStatus()
+                            Globals.TIMER_FINISHED = false
+                            Timers.timer().start()
+                            setUpInterstitialAd()
                             Log.d("TAG", "The ad was dismissed.")
                         }
 
@@ -98,7 +104,10 @@ class PlaybackBarView @JvmOverloads constructor(
                             mInterstitialAd = null
                             Log.d("TAG", "The ad was shown.")
                         }
-                    })
+                    }
+                } else {
+                    playbackModel.invertPlayingStatus()
+                }
             } else {
                 playbackModel.invertPlayingStatus()
             }
@@ -146,20 +155,5 @@ class PlaybackBarView @JvmOverloads constructor(
             }
         )
     }
-    private fun scheduleInterstitial() {
-        scheduler.scheduleAtFixedRate(
-            { runOnUiThread { setUpInterstitialAd() } },
-            1,
-            250,
-            TimeUnit.SECONDS
-        )
-    }
-    fun runOnUiThread(action: () -> Unit) {
-        val mainLooper = Looper.getMainLooper()
-        if (Thread.currentThread().id != mainLooper.thread.id) {
-            Handler(mainLooper).post(action)
-        } else {
-            action.invoke()
-        }
-    }
+
 }

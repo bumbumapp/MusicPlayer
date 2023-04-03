@@ -19,10 +19,19 @@
 package org.bumbumapps.musicplayer.home.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.gms.ads.AdError
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import org.bumbumapps.musicplayer.Globals
 import org.bumbumapps.musicplayer.R
+import org.bumbumapps.musicplayer.Timers
 import org.bumbumapps.musicplayer.music.Song
 import org.bumbumapps.musicplayer.settings.SettingsManager
 import org.bumbumapps.musicplayer.ui.DisplayMode
@@ -36,6 +45,8 @@ import org.bumbumapps.musicplayer.ui.sliceArticle
  * @author
  */
 class SongListFragment : HomeListFragment() {
+    private var mInterstitialAd: InterstitialAd? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,16 +56,69 @@ class SongListFragment : HomeListFragment() {
 
         val adapter = SongsAdapter(
             doOnClick = { song ->
-                playbackModel.playSong(song)
+                if (Globals.TIMER_FINISHED){
+                    if (mInterstitialAd != null) {
+                        mInterstitialAd!!.show(requireActivity())
+                        mInterstitialAd!!.fullScreenContentCallback = object :
+                            FullScreenContentCallback() {
+                            override fun onAdDismissedFullScreenContent() {
+                                playbackModel.playSong(song)
+                                Globals.TIMER_FINISHED = false
+                                Timers.timer().start()
+                                setUpInterstitialAd()
+                                Log.d("TAG", "The ad was dismissed.")
+                            }
+
+                            override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                                // Called when fullscreen content failed to show.
+                                Log.d("TAG", "The ad failed to show.")
+                            }
+
+                            override fun onAdShowedFullScreenContent() {
+                                // Called when fullscreen content is shown.
+                                // Make sure to set your reference to null so you don't
+                                // show it a second time.
+                                mInterstitialAd = null
+                                Log.d("TAG", "The ad was shown.")
+                            }
+                        }
+                    } else {
+                        playbackModel.playSong(song)
+                    }
+                } else {
+                    playbackModel.playSong(song)
+                }
+
             },
             ::newMenu
         )
 
         setupRecycler(R.id.home_song_list, adapter, homeModel.songs)
-
+        setUpInterstitialAd()
         return binding.root
     }
+    private fun setUpInterstitialAd() {
+        val adRequest = AdRequest.Builder().build()
+        if (context != null) {
+            InterstitialAd.load(
+                context, "ca-app-pub-8444865753152507/4732066868", adRequest,
+                object : InterstitialAdLoadCallback() {
+                    override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                        // The mInterstitialAd reference will be null until
+                        // an ad is loaded.
+                        mInterstitialAd = interstitialAd
+                        Log.i("TAG", "onAdLoaded")
+                    }
 
+                    override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+                        // Handle the error
+                        Log.i("TAG", loadAdError.message)
+                        mInterstitialAd = null
+                    }
+                }
+            )
+        }
+    }
     override val listPopupProvider: (Int) -> String
         get() = { idx ->
             val song = homeModel.songs.value!![idx]

@@ -19,8 +19,6 @@
 package org.bumbumapps.musicplayer.playback
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -36,8 +34,11 @@ import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import org.bumbumapps.musicplayer.Globals
+import org.bumbumapps.musicplayer.Globals.TIMER_FINISHED
 import org.bumbumapps.musicplayer.MainFragmentDirections
 import org.bumbumapps.musicplayer.R
+import org.bumbumapps.musicplayer.Timers
 import org.bumbumapps.musicplayer.databinding.FragmentPlaybackBinding
 import org.bumbumapps.musicplayer.detail.DetailViewModel
 import org.bumbumapps.musicplayer.playback.state.LoopMode
@@ -45,7 +46,6 @@ import org.bumbumapps.musicplayer.ui.memberBinding
 import org.bumbumapps.musicplayer.util.logD
 import org.bumbumapps.musicplayer.util.systemBarsCompat
 import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
 
 /**
  * A [Fragment] that displays more information about the song, along with more media controls.
@@ -55,7 +55,6 @@ import java.util.concurrent.TimeUnit
 class PlaybackFragment : Fragment() {
     private val playbackModel: PlaybackViewModel by activityViewModels()
     private val detailModel: DetailViewModel by activityViewModels()
-    val scheduler = Executors.newSingleThreadScheduledExecutor()
     private var mInterstitialAd: InterstitialAd? = null
     private final var TAG = "TAG"
     private val binding by memberBinding(FragmentPlaybackBinding::inflate) {
@@ -74,7 +73,7 @@ class PlaybackFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.playbackModel = playbackModel
         binding.detailModel = detailModel
-        scheduleInterstitial()
+        setUpInterstitialAd()
 
         binding.root.setOnApplyWindowInsetsListener { _, insets ->
             val bars = insets.systemBarsCompat
@@ -92,12 +91,16 @@ class PlaybackFragment : Fragment() {
                 navigateUp()
             }
             binding.playbackPlayPause.setOnClickListener {
-                if (mInterstitialAd != null) {
-                    mInterstitialAd!!.show(requireActivity())
-                    mInterstitialAd!!.setFullScreenContentCallback(object :
+                if (TIMER_FINISHED){
+                    if (mInterstitialAd != null) {
+                        mInterstitialAd!!.show(requireActivity())
+                        mInterstitialAd!!.fullScreenContentCallback = object :
                             FullScreenContentCallback() {
                             override fun onAdDismissedFullScreenContent() {
                                 playbackModel.invertPlayingStatus()
+                                TIMER_FINISHED = false
+                                Timers.timer().start()
+                                setUpInterstitialAd()
                                 Log.d("TAG", "The ad was dismissed.")
                             }
 
@@ -113,10 +116,14 @@ class PlaybackFragment : Fragment() {
                                 mInterstitialAd = null
                                 Log.d("TAG", "The ad was shown.")
                             }
-                        })
+                        }
+                    } else {
+                        playbackModel.invertPlayingStatus()
+                    }
                 } else {
                     playbackModel.invertPlayingStatus()
                 }
+
             }
             setOnMenuItemClickListener { item ->
                 if (item.itemId == R.id.action_queue) {
@@ -225,24 +232,6 @@ class PlaybackFragment : Fragment() {
             )
         }
     }
-    private fun scheduleInterstitial() {
-        scheduler.scheduleAtFixedRate(
-            {
-                runOnUiThread {
-                    setUpInterstitialAd()
-                }
-            },
-            1,
-            350,
-            TimeUnit.SECONDS
-        )
-    }
-    fun runOnUiThread(action: () -> Unit) {
-        val mainLooper = Looper.getMainLooper()
-        if (Thread.currentThread().id != mainLooper.thread.id) {
-            Handler(mainLooper).post(action)
-        } else {
-            action.invoke()
-        }
-    }
+
+
 }

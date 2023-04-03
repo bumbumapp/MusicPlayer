@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(
             this, R.layout.activity_main
         )
-//        loadBannerads(binding)
+        Timers.timer().start()
         prefence = MyPreference(this@MainActivity)
         prefence.setBoolen(true)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
