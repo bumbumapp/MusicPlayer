@@ -93,16 +93,16 @@ class AlbumListFragment : HomeListFragment() {
 
         override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
             val settingsManager = SettingsManager.getInstance()
-            if (!settingsManager.addAudios) {
-                if (!data[position].name.contains("Audio")) {
-                    holder.bind(data[position])
-                }
+//            if (!settingsManager.addAudios) {
+//                if (!data[position].name.contains("Audio")) {
+//                    holder.bind(data[position])
+//                }
 //                if (!data[position].name.isDigitsOnly()) {
 //                    holder.bind(data[position])
 //                }
-            } else {
-                holder.bind(data[position])
-            }
+//            } else {
+            holder.bind(data[position])
+//            }
         }
     }
 }

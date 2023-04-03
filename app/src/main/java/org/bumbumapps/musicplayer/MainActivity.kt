@@ -29,23 +29,21 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
 import androidx.viewbinding.ViewBinding
-import com.google.android.gms.ads.AdView
+//import com.google.android.gms.ads.AdView
 import org.bumbumapps.musicplayer.accent.Accent
 import org.bumbumapps.musicplayer.databinding.ActivityMainBinding
 import org.bumbumapps.musicplayer.playback.PlaybackViewModel
 import org.bumbumapps.musicplayer.playback.system.PlaybackService
 import org.bumbumapps.musicplayer.settings.SettingsManager
-import org.bumbumapps.musicplayer.util.isNight
-import org.bumbumapps.musicplayer.util.logD
-import org.bumbumapps.musicplayer.util.replaceInsetsCompat
-import org.bumbumapps.musicplayer.util.systemBarsCompat
+import org.bumbumapps.musicplayer.util.*
 
 /**
  * The single [AppCompatActivity] for Auxio.
  */
 class MainActivity : AppCompatActivity() {
     private val playbackModel: PlaybackViewModel by viewModels()
-    private lateinit var adview: AdView
+//    private lateinit var adview: AdView
+   lateinit var prefence: MyPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +54,8 @@ class MainActivity : AppCompatActivity() {
             this, R.layout.activity_main
         )
 //        loadBannerads(binding)
-
+        prefence = MyPreference(this@MainActivity)
+        prefence.setBoolen(true)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
             applyEdgeToEdgeWindow(binding)
         } else {
@@ -171,5 +170,13 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val KEY_INTENT_USED = BuildConfig.APPLICATION_ID + ".key.FILE_INTENT_USED"
+    }
+
+    override fun onBackPressed() {
+        val fragment =
+            this.supportFragmentManager.findFragmentById(R.id.settings_fragment)
+        (fragment as? IOBackPressed)?.onBackPressed()?.not()?.let {
+            super.onBackPressed()
+        }
     }
 }

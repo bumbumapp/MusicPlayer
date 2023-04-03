@@ -159,6 +159,7 @@
     <string name="fmt_songs_loaded">Songs loaded: %d</string>
     <string name="use_add_audio">Use adding audio songs</string>
     <string name="add_audio">Add audios</string>
+    <string name="about">About</string>
 
     <plurals name="fmt_song_count">
         <item quantity="one">%d Song</item>

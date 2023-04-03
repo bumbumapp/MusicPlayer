@@ -10,7 +10,7 @@
     <!-- Workaround for ExoPlayer requiring unnecessary permissions -->
     <uses-permission
         android:name="android.permission.ACCESS_NETWORK_STATE"
-        tools:node="remove" />
+        />
 
     <queries />
 
@@ -71,6 +71,6 @@
         </receiver>
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-8405656592612252~6187263152"/>
+            android:value="ca-app-pub-8444865753152507~6932205868"/>
     </application>
 </manifest>

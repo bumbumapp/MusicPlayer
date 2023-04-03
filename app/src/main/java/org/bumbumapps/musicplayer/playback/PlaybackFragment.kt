@@ -19,6 +19,9 @@
 package org.bumbumapps.musicplayer.playback
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -27,6 +30,12 @@ import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdError
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import org.bumbumapps.musicplayer.MainFragmentDirections
 import org.bumbumapps.musicplayer.R
 import org.bumbumapps.musicplayer.databinding.FragmentPlaybackBinding
@@ -35,6 +44,8 @@ import org.bumbumapps.musicplayer.playback.state.LoopMode
 import org.bumbumapps.musicplayer.ui.memberBinding
 import org.bumbumapps.musicplayer.util.logD
 import org.bumbumapps.musicplayer.util.systemBarsCompat
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 /**
  * A [Fragment] that displays more information about the song, along with more media controls.
@@ -44,6 +55,9 @@ import org.bumbumapps.musicplayer.util.systemBarsCompat
 class PlaybackFragment : Fragment() {
     private val playbackModel: PlaybackViewModel by activityViewModels()
     private val detailModel: DetailViewModel by activityViewModels()
+    val scheduler = Executors.newSingleThreadScheduledExecutor()
+    private var mInterstitialAd: InterstitialAd? = null
+    private final var TAG = "TAG"
     private val binding by memberBinding(FragmentPlaybackBinding::inflate) {
         playbackSong.isSelected = false // Clear marquee to prevent a memory leak
     }
@@ -60,6 +74,7 @@ class PlaybackFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.playbackModel = playbackModel
         binding.detailModel = detailModel
+        scheduleInterstitial()
 
         binding.root.setOnApplyWindowInsetsListener { _, insets ->
             val bars = insets.systemBarsCompat
@@ -76,7 +91,33 @@ class PlaybackFragment : Fragment() {
             setNavigationOnClickListener {
                 navigateUp()
             }
+            binding.playbackPlayPause.setOnClickListener {
+                if (mInterstitialAd != null) {
+                    mInterstitialAd!!.show(requireActivity())
+                    mInterstitialAd!!.setFullScreenContentCallback(object :
+                            FullScreenContentCallback() {
+                            override fun onAdDismissedFullScreenContent() {
+                                playbackModel.invertPlayingStatus()
+                                Log.d("TAG", "The ad was dismissed.")
+                            }
 
+                            override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                                // Called when fullscreen content failed to show.
+                                Log.d("TAG", "The ad failed to show.")
+                            }
+
+                            override fun onAdShowedFullScreenContent() {
+                                // Called when fullscreen content is shown.
+                                // Make sure to set your reference to null so you don't
+                                // show it a second time.
+                                mInterstitialAd = null
+                                Log.d("TAG", "The ad was shown.")
+                            }
+                        })
+                } else {
+                    playbackModel.invertPlayingStatus()
+                }
+            }
             setOnMenuItemClickListener { item ->
                 if (item.itemId == R.id.action_queue) {
                     findNavController().navigate(MainFragmentDirections.actionShowQueue())
@@ -161,5 +202,47 @@ class PlaybackFragment : Fragment() {
         // This is a dumb and fragile hack but this fragment isn't part of the navigation stack
         // so we can't really do much
         (requireView().parent.parent.parent as PlaybackLayout).collapse()
+    }
+    private fun setUpInterstitialAd() {
+        val adRequest = AdRequest.Builder().build()
+        if (context != null) {
+            InterstitialAd.load(
+                context, "ca-app-pub-8444865753152507/4732066868", adRequest,
+                object : InterstitialAdLoadCallback() {
+                    override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                        // The mInterstitialAd reference will be null until
+                        // an ad is loaded.
+                        mInterstitialAd = interstitialAd
+                        Log.i("TAG", "onAdLoaded")
+                    }
+
+                    override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+                        // Handle the error
+                        Log.i("TAG", loadAdError.message)
+                        mInterstitialAd = null
+                    }
+                }
+            )
+        }
+    }
+    private fun scheduleInterstitial() {
+        scheduler.scheduleAtFixedRate(
+            {
+                runOnUiThread {
+                    setUpInterstitialAd()
+                }
+            },
+            1,
+            350,
+            TimeUnit.SECONDS
+        )
+    }
+    fun runOnUiThread(action: () -> Unit) {
+        val mainLooper = Looper.getMainLooper()
+        if (Thread.currentThread().id != mainLooper.thread.id) {
+            Handler(mainLooper).post(action)
+        } else {
+            action.invoke()
+        }
     }
 }

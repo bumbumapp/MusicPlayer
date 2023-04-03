@@ -24,14 +24,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.jakewharton.processphoenix.ProcessPhoenix
 import org.bumbumapps.musicplayer.MainActivity
 import org.bumbumapps.musicplayer.databinding.FragmentSettingsBinding
+import org.bumbumapps.musicplayer.util.IOBackPressed
+import org.bumbumapps.musicplayer.util.MyPreference
 
 /**
  * A container [Fragment] for the settings menu.
  * @author OxygenCobalt
  */
-open class SettingsFragment : Fragment() {
+open class SettingsFragment : Fragment(),IOBackPressed  {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,20 +45,26 @@ open class SettingsFragment : Fragment() {
         binding.settingsToolbar.apply {
 
             setNavigationOnClickListener {
-//               var prefence: MyPreference
-//                prefence = MyPreference(requireContext())
-//                if (!prefence.getBoolen("audio")) {
-//                    ProcessPhoenix.triggerRebirth(requireContext())
-//                } else {
-                val back = Intent(requireContext(), MainActivity::class.java)
-                back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(back)
-//                }
+                val prefence: MyPreference
+                prefence = MyPreference(requireContext())
+                if (!prefence.getBoolen()){
+                ProcessPhoenix.triggerRebirth(requireContext())
+                } else {
+                    val back = Intent(requireContext(), MainActivity::class.java)
+                    back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(back)
+                }
             }
         }
 
         binding.settingsAppbar.liftOnScrollTargetViewId = androidx.preference.R.id.recycler_view
 
         return binding.root
+
     }
+
+    override fun onBackPressed(): Boolean {
+       return false
+    }
+
 }

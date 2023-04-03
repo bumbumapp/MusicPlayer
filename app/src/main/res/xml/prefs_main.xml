@@ -133,6 +133,7 @@
 
     <PreferenceCategory
         app:layout="@layout/item_header"
+        app:allowDividerBelow="false"
         app:title="@string/set_content">
 
         <Preference
@@ -143,9 +144,27 @@
 
         <Preference
             app:iconSpaceReserved="false"
+            app:allowDividerBelow="false"
             app:key="auxio_excluded_dirs"
             app:summary="@string/set_excluded_desc"
             app:title="@string/set_excluded" />
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        app:layout="@layout/item_header"
+        app:title="@string/about">
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="app_licence"
+            app:summary="GPL-3.0 license"
+            app:title="App Licence" />
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="source_code"
+            app:allowDividerBelow="true"
+            app:title="Source Code" />
 
     </PreferenceCategory>
 </PreferenceScreen>

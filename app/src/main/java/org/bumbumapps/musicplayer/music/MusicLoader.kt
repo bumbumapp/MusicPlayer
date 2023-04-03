@@ -3,8 +3,10 @@ package org.bumbumapps.musicplayer.music
 import android.content.Context
 import android.provider.MediaStore
 import androidx.core.database.getStringOrNull
+import androidx.core.text.isDigitsOnly
 import org.bumbumapps.musicplayer.R
 import org.bumbumapps.musicplayer.excluded.ExcludedDatabase
+import org.bumbumapps.musicplayer.settings.SettingsManager
 
 /**
  * This class acts as the base for most the black magic required to get a remotely sensible music
@@ -163,7 +165,11 @@ class MusicLoader {
         songs = songs.distinctBy {
             it.name to it.albumName to it.artistName to it.track to it.duration
         }.toMutableList()
-
+        val settingsManager = SettingsManager.getInstance()
+        if (!settingsManager.addAudios) {
+            songs.removeAll { it.albumName.contains("Audio") }
+            songs.removeAll { it.albumName.isDigitsOnly() }
+        }
         return songs
     }
 

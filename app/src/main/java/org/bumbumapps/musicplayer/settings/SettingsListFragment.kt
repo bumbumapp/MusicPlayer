@@ -18,6 +18,8 @@
 
 package org.bumbumapps.musicplayer.settings
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.DrawableRes
@@ -38,10 +40,7 @@ import org.bumbumapps.musicplayer.music.MusicViewModel
 import org.bumbumapps.musicplayer.playback.PlaybackViewModel
 import org.bumbumapps.musicplayer.settings.pref.IntListPrefDialog
 import org.bumbumapps.musicplayer.settings.pref.IntListPreference
-import org.bumbumapps.musicplayer.util.isNight
-import org.bumbumapps.musicplayer.util.logD
-import org.bumbumapps.musicplayer.util.showToast
-import org.bumbumapps.musicplayer.util.systemBarsCompat
+import org.bumbumapps.musicplayer.util.*
 
 /**
  * The actual fragment containing the settings menu. Inherits [PreferenceFragmentCompat].
@@ -67,7 +66,6 @@ class SettingsListFragment : PreferenceFragmentCompat() {
 
             setOnApplyWindowInsetsListener { _, insets ->
                 updatePadding(bottom = insets.systemBarsCompat.bottom)
-
                 insets
             }
         }
@@ -121,10 +119,30 @@ class SettingsListFragment : PreferenceFragmentCompat() {
                         true
                     }
                 }
+                SettingsManager.APP_LICENCE -> {
+                    onPreferenceClickListener = Preference.OnPreferenceClickListener {
+                        val url="https://github.com/OxygenCobalt/Auxio/blob/dev/LICENSE"
+                        val intentUrl = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                        startActivity(intentUrl)
+                        true
 
+                    }
+                }
+                SettingsManager.SOURCE_CODE -> {
+                    onPreferenceClickListener = Preference.OnPreferenceClickListener {
+                        val url="https://github.com/bumbumapp/MusicPlayer"
+                        val intentUrl = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                        startActivity(intentUrl)
+                        true
+
+                    }
+                }
                 SettingsManager.KEY_ADD_AUDIO -> {
                     onPreferenceClickListener = Preference.OnPreferenceClickListener {
-                        requireActivity().recreate()
+                        var prefence: MyPreference
+                        prefence = MyPreference(requireContext())
+
+                        prefence.setBoolen(!prefence.getBoolen())
                         true
                     }
                 }

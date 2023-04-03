@@ -131,7 +131,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_mid_large"
             android:contentDescription="@string/desc_play_pause"
-            android:onClick="@{() -> playbackModel.invertPlayingStatus()}"
             android:src="@drawable/sel_playing_state"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/playback_seek_bar"

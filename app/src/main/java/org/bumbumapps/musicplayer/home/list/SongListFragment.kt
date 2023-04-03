@@ -91,13 +91,14 @@ class SongListFragment : HomeListFragment() {
 
         override fun onBindViewHolder(holder: SongViewHolder, position: Int) {
             val settingsManager = SettingsManager.getInstance()
-            if (!settingsManager.addAudios) {
-                if (!data[position].albumName.contains("Audio")) {
-                    holder.bind(data[position])
-                }
-            } else {
-                holder.bind(data[position])
-            }
+            holder.bind(data[position])
+//            if (!settingsManager.addAudios) {
+//                if (!data[position].albumName.contains("Audio")) {
+//                    holder.bind(data[position])
+//                }
+//            } else {
+//                holder.bind(data[position])
+//            }
         }
     }
 }

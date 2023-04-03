@@ -284,6 +284,9 @@ class SettingsManager private constructor(context: Context) :
         const val KEY_SAVE_STATE = "auxio_save_state"
         const val KEY_EXCLUDED = "auxio_excluded_dirs"
 
+        const val APP_LICENCE = "app_licence"
+        const val SOURCE_CODE = "source_code"
+
         const val KEY_SEARCH_FILTER_MODE = "KEY_SEARCH_FILTER"
 
         const val KEY_LIB_SONGS_SORT = "auxio_songs_sort"
