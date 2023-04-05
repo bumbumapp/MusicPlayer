@@ -9,8 +9,8 @@ android {
 
     defaultConfig {
         applicationId "org.bumbumapps.musicplayer"
-        versionName "2.3.2"
-        versionCode 6
+        versionName "2.3.3"
+        versionCode 7
 
         minSdkVersion 21
         targetSdkVersion 31
