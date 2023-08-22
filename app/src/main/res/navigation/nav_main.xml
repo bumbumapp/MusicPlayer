@@ -16,7 +16,7 @@
             app:popEnterAnim="@anim/nav_slide_pop_enter_anim"
             app:popExitAnim="@anim/nav_slide_pop_exit_anim" />
         <action
-            android:id="@+id/action_show_settings"
+            android:id="@+id/action_show_settings1"
             app:destination="@id/settings_fragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
@@ -33,5 +33,9 @@
         android:id="@+id/settings_fragment"
         android:name="org.bumbumapps.musicplayer.settings.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settings_fragment_to_main_fragment"
+            app:destination="@id/main_fragment" />
+    </fragment>
 </navigation>

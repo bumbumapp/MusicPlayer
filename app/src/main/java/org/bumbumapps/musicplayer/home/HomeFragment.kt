@@ -31,17 +31,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.gms.ads.AdError
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.FullScreenContentCallback
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.tabs.TabLayoutMediator
-import org.bumbumapps.musicplayer.Globals
-import org.bumbumapps.musicplayer.MainFragmentDirections
-import org.bumbumapps.musicplayer.R
-import org.bumbumapps.musicplayer.Timers
+import org.bumbumapps.musicplayer.*
 import org.bumbumapps.musicplayer.databinding.FragmentHomeBinding
 import org.bumbumapps.musicplayer.detail.DetailViewModel
 import org.bumbumapps.musicplayer.home.list.AlbumListFragment
@@ -69,7 +60,6 @@ class HomeFragment : Fragment() {
     private val detailModel: DetailViewModel by activityViewModels()
     private val homeModel: HomeViewModel by activityViewModels()
     private val musicModel: MusicViewModel by activityViewModels()
-    private var mInterstitialAd: InterstitialAd? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -92,7 +82,7 @@ class HomeFragment : Fragment() {
 
                     R.id.action_settings -> {
                         parentFragment?.parentFragment?.findNavController()?.navigate(
-                            MainFragmentDirections.actionShowSettings()
+                            MainFragmentDirections.actionShowSettings1()
                         )
                     }
 
@@ -123,6 +113,7 @@ class HomeFragment : Fragment() {
 
             sortItem = menu.findItem(R.id.submenu_sorting)
         }
+        AdsLoader.displayInterstitial(requireContext())
 
         binding.homePager.apply {
             adapter = HomePagerAdapter()
@@ -164,38 +155,8 @@ class HomeFragment : Fragment() {
         }
 
         binding.homeFab.setOnClickListener {
-            if (Globals.TIMER_FINISHED){
-                if (mInterstitialAd != null) {
-                    mInterstitialAd!!.show(requireActivity())
-                    mInterstitialAd!!.fullScreenContentCallback = object :
-                        FullScreenContentCallback() {
-                        override fun onAdDismissedFullScreenContent() {
-                            playbackModel.shuffleAll()
-                            Globals.TIMER_FINISHED = false
-                            Timers.timer().start()
-                            setUpInterstitialAd()
-                            Log.d("TAG", "The ad was dismissed.")
-                        }
+            AdsLoader.showAds(requireContext()){playbackModel.shuffleAll()};
 
-                        override fun onAdFailedToShowFullScreenContent(adError: AdError) {
-                            // Called when fullscreen content failed to show.
-                            Log.d("TAG", "The ad failed to show.")
-                        }
-
-                        override fun onAdShowedFullScreenContent() {
-                            // Called when fullscreen content is shown.
-                            // Make sure to set your reference to null so you don't
-                            // show it a second time.
-                            mInterstitialAd = null
-                            Log.d("TAG", "The ad was shown.")
-                        }
-                    }
-                } else {
-                    playbackModel.shuffleAll()
-                }
-            } else {
-                playbackModel.shuffleAll()
-            }
 
         }
 
@@ -292,7 +253,6 @@ class HomeFragment : Fragment() {
         }
 
         logD("Fragment Created.")
-        setUpInterstitialAd()
         return binding.root
     }
 
@@ -302,18 +262,20 @@ class HomeFragment : Fragment() {
         isVisible: (Int) -> Boolean = { true }
     ) {
         val toHighlight = homeModel.getSortForDisplay(displayMode)
+   item.subMenu?.let { subItems->
+       for (option in subItems) {
+           if (option.itemId == toHighlight.itemId) {
+               option.isChecked = true
+           }
 
-        for (option in item.subMenu) {
-            if (option.itemId == toHighlight.itemId) {
-                option.isChecked = true
-            }
+           if (option.itemId == R.id.option_sort_asc) {
+               option.isChecked = toHighlight.isAscending
+           }
 
-            if (option.itemId == R.id.option_sort_asc) {
-                option.isChecked = toHighlight.isAscending
-            }
+           option.isVisible = isVisible(option.itemId)
+       }
 
-            option.isVisible = isVisible(option.itemId)
-        }
+   }
     }
 
     private val DisplayMode.viewId: Int get() = when (this) {
@@ -321,28 +283,6 @@ class HomeFragment : Fragment() {
         DisplayMode.SHOW_ALBUMS -> R.id.home_album_list
         DisplayMode.SHOW_ARTISTS -> R.id.home_artist_list
         DisplayMode.SHOW_GENRES -> R.id.home_genre_list
-    }
-    private fun setUpInterstitialAd() {
-        val adRequest = AdRequest.Builder().build()
-        if (context != null) {
-            InterstitialAd.load(
-                context, "ca-app-pub-8444865753152507/4732066868", adRequest,
-                object : InterstitialAdLoadCallback() {
-                    override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                        // The mInterstitialAd reference will be null until
-                        // an ad is loaded.
-                        mInterstitialAd = interstitialAd
-                        Log.i("TAG", "onAdLoaded")
-                    }
-
-                    override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-                        // Handle the error
-                        Log.i("TAG", loadAdError.message)
-                        mInterstitialAd = null
-                    }
-                }
-            )
-        }
     }
 
     private inner class HomePagerAdapter :
@@ -359,4 +299,6 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
+
 }

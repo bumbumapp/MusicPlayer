@@ -20,6 +20,7 @@ package org.bumbumapps.musicplayer
 import android.Manifest
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,7 +54,7 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentMainBinding.inflate(inflater)
-
+        Log.d("MainFragment","FRAGMENT STARTED :MAIN")
         // Build the permission launcher here as you can only do it in onCreateView/onCreate
         val permLauncher = registerForActivityResult(
             ActivityResultContracts.RequestPermission()
@@ -105,7 +106,9 @@ class MainFragment : Fragment() {
             // Handle the loader response.
             when (response) {
                 // Ok, start restoring playback now
-                is MusicStore.Response.Ok -> playbackModel.setupPlayback(requireContext())
+                is MusicStore.Response.Ok ->{
+                    playbackModel.setupPlayback(requireContext())
+                }
 
                 // Error, show the error to the user
                 is MusicStore.Response.Err -> {
@@ -130,7 +133,12 @@ class MainFragment : Fragment() {
 
                         MusicStore.ErrorKind.NO_PERMS -> {
                             snackbar.setAction(R.string.lbl_grant) {
-                                permLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                                    permLauncher.launch(Manifest.permission.READ_MEDIA_AUDIO)
+                                }else{
+                                    permLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+
+                                }
                             }
                         }
                     }
@@ -145,6 +153,7 @@ class MainFragment : Fragment() {
 
         return binding.root
     }
+
 
     override fun onResume() {
         super.onResume()

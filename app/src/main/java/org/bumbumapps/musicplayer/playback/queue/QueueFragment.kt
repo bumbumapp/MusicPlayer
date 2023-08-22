@@ -22,12 +22,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import org.bumbumapps.musicplayer.databinding.FragmentQueueBinding
 import org.bumbumapps.musicplayer.playback.PlaybackViewModel
+import org.bumbumapps.musicplayer.settings.SettingsManager
 
 /**
  * A [Fragment] that shows the queue and enables editing as well.
@@ -35,7 +37,7 @@ import org.bumbumapps.musicplayer.playback.PlaybackViewModel
  */
 class QueueFragment : Fragment() {
     private val playbackModel: PlaybackViewModel by activityViewModels()
-
+    private var settingsManager = SettingsManager.getInstance()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -72,8 +74,12 @@ class QueueFragment : Fragment() {
                 findNavController().navigateUp()
                 return@observe
             }
-
-            queueAdapter.submitList(queue.toMutableList())
+            val queueList = if (!settingsManager.addAudios) {
+                queue.filter {
+                    !it.albumName.contains("Audio") && !it.albumName.isDigitsOnly()
+                }.toMutableList()
+            }else queue.toMutableList()
+            queueAdapter.submitList(queueList.toMutableList())
         }
 
         playbackModel.isShuffling.observe(viewLifecycleOwner) { isShuffling ->

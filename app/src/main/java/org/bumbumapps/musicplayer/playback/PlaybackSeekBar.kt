@@ -18,6 +18,7 @@
 
 package org.bumbumapps.musicplayer.playback
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
@@ -71,15 +72,18 @@ class PlaybackSeekBar @JvmOverloads constructor(
         binding.playbackSongDuration.text = seconds.toDuration()
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onStartTrackingTouch(slider: Slider) {
         binding.playbackDurationCurrent.isActivated = true
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onStopTrackingTouch(slider: Slider) {
         binding.playbackDurationCurrent.isActivated = false
         onConfirmListener?.invoke(slider.value.toLong())
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onValueChange(slider: Slider, value: Float, fromUser: Boolean) {
         if (fromUser) {
             // Don't actually seek yet when the user moves the progress bar, as to make our

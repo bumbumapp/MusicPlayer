@@ -20,15 +20,17 @@ package org.bumbumapps.musicplayer.settings
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.jakewharton.processphoenix.ProcessPhoenix
+import androidx.navigation.findNavController
+
+import org.bumbumapps.musicplayer.Globals.AUDIO_CHANGED
 import org.bumbumapps.musicplayer.MainActivity
 import org.bumbumapps.musicplayer.databinding.FragmentSettingsBinding
 import org.bumbumapps.musicplayer.util.IOBackPressed
-import org.bumbumapps.musicplayer.util.MyPreference
 
 /**
  * A container [Fragment] for the settings menu.
@@ -41,18 +43,16 @@ open class SettingsFragment : Fragment(),IOBackPressed  {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentSettingsBinding.inflate(inflater)
-        val settingsManager = SettingsManager.getInstance()
         binding.settingsToolbar.apply {
 
             setNavigationOnClickListener {
-                val prefence: MyPreference
-                prefence = MyPreference(requireContext())
-                if (!prefence.getBoolen()){
-                ProcessPhoenix.triggerRebirth(requireContext())
-                } else {
-                    val back = Intent(requireContext(), MainActivity::class.java)
-                    back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                if(AUDIO_CHANGED) {
+                    AUDIO_CHANGED = false
+                    val back = Intent(context, MainActivity::class.java)
+                    back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     startActivity(back)
+                }else{
+                    findNavController().popBackStack()
                 }
             }
         }

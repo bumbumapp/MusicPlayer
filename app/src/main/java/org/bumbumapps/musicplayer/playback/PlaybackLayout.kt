@@ -336,8 +336,6 @@ class PlaybackLayout @JvmOverloads constructor(
     override fun drawChild(canvas: Canvas, child: View, drawingTime: Long): Boolean {
         val save = canvas.save()
 
-        // Drawing views that are under the panel is inefficient, clip the canvas
-        // so that doesn't occur.
         if (child == contentView) {
             canvas.getClipBounds(tRect)
             tRect.bottom = tRect.bottom.coerceAtMost(playbackContainerView.top)

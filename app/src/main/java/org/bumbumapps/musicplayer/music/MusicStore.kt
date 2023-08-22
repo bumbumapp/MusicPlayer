@@ -24,10 +24,15 @@ import android.content.ContentResolver
 import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.provider.OpenableColumns
+import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import androidx.core.text.isDigitsOnly
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.bumbumapps.musicplayer.Globals.ADD_AUDIO_CHANGED
 import org.bumbumapps.musicplayer.util.logD
 import org.bumbumapps.musicplayer.util.logE
 import java.lang.Exception
@@ -54,13 +59,18 @@ class MusicStore private constructor() {
     /**
      * Load/Sort the entire music library. Should always be ran on a coroutine.
      */
+    @RequiresApi(Build.VERSION_CODES.R)
     private fun load(context: Context): Response {
         logD("Starting initial music load...")
-
-        val notGranted = ContextCompat.checkSelfPermission(
-            context, Manifest.permission.READ_EXTERNAL_STORAGE
-        ) == PackageManager.PERMISSION_DENIED
-
+        val notGranted = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ContextCompat.checkSelfPermission(
+                context, Manifest.permission.READ_MEDIA_AUDIO
+            ) == PackageManager.PERMISSION_DENIED
+        }else{
+            ContextCompat.checkSelfPermission(
+                context, Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_DENIED
+        }
         if (notGranted) {
             return Response.Err(ErrorKind.NO_PERMS)
         }
@@ -104,7 +114,6 @@ class MusicStore private constructor() {
         cur?.use { cursor ->
             cursor.moveToFirst()
 
-            // Make studio shut up about "invalid ranges" that don't exist
             @SuppressLint("Range")
             val fileName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
 
@@ -136,13 +145,14 @@ class MusicStore private constructor() {
          * thread. If the instance has already been loaded successfully, then it will be returned
          * immediately.
          */
+        @RequiresApi(Build.VERSION_CODES.R)
         suspend fun initInstance(context: Context): Response {
-            val currentInstance = RESPONSE
-
-            if (currentInstance is Response.Ok) {
+            val currentInstance = MusicStore().load(context)
+//
+            if (currentInstance is Response.Ok && !ADD_AUDIO_CHANGED) {
                 return currentInstance
             }
-
+            ADD_AUDIO_CHANGED = false
             val response = withContext(Dispatchers.IO) {
                 val response = MusicStore().load(context)
 

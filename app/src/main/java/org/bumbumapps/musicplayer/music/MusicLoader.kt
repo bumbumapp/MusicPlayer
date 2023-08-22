@@ -1,7 +1,10 @@
 package org.bumbumapps.musicplayer.music
 
 import android.content.Context
+import android.os.Build
 import android.provider.MediaStore
+import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.core.database.getStringOrNull
 import androidx.core.text.isDigitsOnly
 import org.bumbumapps.musicplayer.R
@@ -77,6 +80,7 @@ class MusicLoader {
         val songs: List<Song>
     )
 
+    @RequiresApi(Build.VERSION_CODES.R)
     fun load(context: Context): Library? {
         val songs = loadSongs(context)
         if (songs.isEmpty()) return null
@@ -93,6 +97,7 @@ class MusicLoader {
         )
     }
 
+    @RequiresApi(Build.VERSION_CODES.R)
     fun loadSongs(context: Context): List<Song> {
         var songs = mutableListOf<Song>()
         val blacklistDatabase = ExcludedDatabase.getInstance(context)
@@ -170,6 +175,7 @@ class MusicLoader {
             songs.removeAll { it.albumName.contains("Audio") }
             songs.removeAll { it.albumName.isDigitsOnly() }
         }
+
         return songs
     }
 

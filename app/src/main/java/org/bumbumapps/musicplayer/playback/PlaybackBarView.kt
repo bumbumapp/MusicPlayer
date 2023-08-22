@@ -9,13 +9,8 @@ import android.view.WindowInsets
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.updatePadding
 import androidx.lifecycle.LifecycleOwner
-import com.google.android.gms.ads.AdError
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.FullScreenContentCallback
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.color.MaterialColors
+import org.bumbumapps.musicplayer.AdsLoader
 import org.bumbumapps.musicplayer.Globals
 import org.bumbumapps.musicplayer.R
 import org.bumbumapps.musicplayer.Timers
@@ -39,12 +34,10 @@ class PlaybackBarView @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
     private val binding = ViewPlaybackBarBinding.inflate(context.inflater, this, true)
     val scheduler = Executors.newSingleThreadScheduledExecutor()
-    private var mInterstitialAd: InterstitialAd? = null
     private final var TAG = "TAG"
 
     init {
         id = R.id.playback_bar
-        setUpInterstitialAd()
         // Deliberately override the progress bar color [in a Lollipop-friendly way] so that
         // we use colorSecondary instead of colorSurfaceVariant. This is for two reasons:
         // 1. colorSurfaceVariant is used with the assumption that the view that is using it
@@ -78,39 +71,8 @@ class PlaybackBarView @JvmOverloads constructor(
         }
 
         binding.playbackPlayPause.setOnClickListener {
+            AdsLoader.showAds(context){playbackModel.invertPlayingStatus()}
 
-            if (Globals.TIMER_FINISHED){
-                if (mInterstitialAd != null) {
-                    mInterstitialAd!!.show(context as Activity)
-                    mInterstitialAd!!.fullScreenContentCallback = object :
-                        FullScreenContentCallback() {
-                        override fun onAdDismissedFullScreenContent() {
-                            playbackModel.invertPlayingStatus()
-                            Globals.TIMER_FINISHED = false
-                            Timers.timer().start()
-                            setUpInterstitialAd()
-                            Log.d("TAG", "The ad was dismissed.")
-                        }
-
-                        override fun onAdFailedToShowFullScreenContent(adError: AdError) {
-                            // Called when fullscreen content failed to show.
-                            Log.d("TAG", "The ad failed to show.")
-                        }
-
-                        override fun onAdShowedFullScreenContent() {
-                            // Called when fullscreen content is shown.
-                            // Make sure to set your reference to null so you don't
-                            // show it a second time.
-                            mInterstitialAd = null
-                            Log.d("TAG", "The ad was shown.")
-                        }
-                    }
-                } else {
-                    playbackModel.invertPlayingStatus()
-                }
-            } else {
-                playbackModel.invertPlayingStatus()
-            }
         }
 
         binding.playbackSkipNext?.setOnClickListener {
@@ -135,25 +97,6 @@ class PlaybackBarView @JvmOverloads constructor(
         binding.executePendingBindings()
     }
 
-    private fun setUpInterstitialAd() {
-        val adRequest = AdRequest.Builder().build()
-        InterstitialAd.load(
-            context, "ca-app-pub-8444865753152507/4732066868", adRequest,
-            object : InterstitialAdLoadCallback() {
-                override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                    // The mInterstitialAd reference will be null until
-                    // an ad is loaded.
-                    mInterstitialAd = interstitialAd
-                    Log.i("TAG", "onAdLoaded")
-                }
 
-                override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-                    // Handle the error
-                    Log.i("TAG", loadAdError.message)
-                    mInterstitialAd = null
-                }
-            }
-        )
-    }
 
 }

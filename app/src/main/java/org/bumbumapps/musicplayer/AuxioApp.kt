@@ -22,6 +22,7 @@ import android.app.Application
 import coil.ImageLoader
 import coil.ImageLoaderFactory
 import coil.request.CachePolicy
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import org.bumbumapps.musicplayer.coil.AlbumArtFetcher
 import org.bumbumapps.musicplayer.coil.ArtistImageFetcher
 import org.bumbumapps.musicplayer.coil.ErrorCrossfadeFactory
@@ -37,6 +38,7 @@ class AuxioApp : Application(), ImageLoaderFactory {
         // Init SettingsManager here so that there aren't any race conditions
         // [e.g PlaybackService gets SettingsManager before activity can init SettingsManager]
         SettingsManager.init(applicationContext)
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
     }
 
     override fun newImageLoader(): ImageLoader {

@@ -21,6 +21,7 @@ package org.bumbumapps.musicplayer
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import androidx.activity.viewModels
@@ -53,9 +54,7 @@ class MainActivity : AppCompatActivity() {
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(
             this, R.layout.activity_main
         )
-        Timers.timer().start()
-        prefence = MyPreference(this@MainActivity)
-        prefence.setBoolen(true)
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
             applyEdgeToEdgeWindow(binding)
         } else {

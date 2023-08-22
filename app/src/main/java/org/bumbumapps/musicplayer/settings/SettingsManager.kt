@@ -239,9 +239,7 @@ class SettingsManager private constructor(context: Context) :
             KEY_LIB_TABS -> callbacks.forEach {
                 it.onLibTabsUpdate(libTabs)
             }
-            KEY_ADD_AUDIO -> callbacks.forEach {
-                it.onAduiosCallback(addAudios)
-            }
+
         }
     }
 
@@ -256,7 +254,6 @@ class SettingsManager private constructor(context: Context) :
         fun onNotifActionUpdate(useAltAction: Boolean) {}
         fun onShowCoverUpdate(showCovers: Boolean) {}
         fun onQualityCoverUpdate(doQualityCovers: Boolean) {}
-        fun onAduiosCallback(showAudios: Boolean) {}
     }
 
     companion object {

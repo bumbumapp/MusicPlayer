@@ -18,6 +18,7 @@
 
 package org.bumbumapps.musicplayer.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -85,7 +86,9 @@ class HomeViewModel : ViewModel(), SettingsManager.Callback {
             mArtists.value = settingsManager.libArtistSort.sortParents(musicStore.artists)
             mGenres.value = settingsManager.libGenreSort.sortParents(musicStore.genres)
         }
+
     }
+
 
     /**
      * Update the current tab based off of the new ViewPager position.
@@ -93,7 +96,6 @@ class HomeViewModel : ViewModel(), SettingsManager.Callback {
     fun updateCurrentTab(pos: Int) {
         mCurTab.value = tabs[pos]
     }
-
     fun finishRecreateTabs() {
         mRecreateTabs.value = false
     }
@@ -151,12 +153,11 @@ class HomeViewModel : ViewModel(), SettingsManager.Callback {
         mRecreateTabs.value = true
     }
 
-    override fun onAduiosCallback(showAudios: Boolean) {
-        addingAudios.value = showAudios
-    }
+
 
     override fun onCleared() {
         super.onCleared()
         settingsManager.removeCallback(this)
+
     }
 }

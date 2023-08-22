@@ -24,6 +24,7 @@ import android.graphics.Canvas
 import android.graphics.Rect
 import android.text.TextUtils
 import android.util.AttributeSet
+import android.util.Log
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
@@ -447,12 +448,16 @@ class FastScrollRecyclerView @JvmOverloads constructor(
         stopScroll()
 
         val trueOffset = offset - paddingTop
-        val itemHeight = itemHeight
+        var itemHeight = itemHeight
+        if(itemHeight ==0 ) {
+           itemHeight = 1
+        }
 
         val firstItemPosition = 0.coerceAtLeast(trueOffset / itemHeight)
         val firstItemTop = firstItemPosition * itemHeight - trueOffset
-
         scrollToPositionWithOffset(firstItemPosition, firstItemTop)
+
+
     }
 
     private fun scrollToPositionWithOffset(position: Int, offset: Int) {

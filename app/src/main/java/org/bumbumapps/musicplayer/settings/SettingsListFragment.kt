@@ -32,10 +32,14 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.children
 import androidx.recyclerview.widget.RecyclerView
 import coil.Coil
+import kotlinx.coroutines.*
+import org.bumbumapps.musicplayer.Globals.ADD_AUDIO_CHANGED
+import org.bumbumapps.musicplayer.Globals.AUDIO_CHANGED
 import org.bumbumapps.musicplayer.R
 import org.bumbumapps.musicplayer.accent.AccentDialog
 import org.bumbumapps.musicplayer.excluded.ExcludedDialog
 import org.bumbumapps.musicplayer.home.tabs.TabCustomizeDialog
+import org.bumbumapps.musicplayer.music.MusicStore
 import org.bumbumapps.musicplayer.music.MusicViewModel
 import org.bumbumapps.musicplayer.playback.PlaybackViewModel
 import org.bumbumapps.musicplayer.settings.pref.IntListPrefDialog
@@ -51,6 +55,8 @@ class SettingsListFragment : PreferenceFragmentCompat() {
     private val playbackModel: PlaybackViewModel by activityViewModels()
     private val musicViewModel: MusicViewModel by activityViewModels()
     val settingsManager = SettingsManager.getInstance()
+    private var job :Job? = null
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -139,10 +145,13 @@ class SettingsListFragment : PreferenceFragmentCompat() {
                 }
                 SettingsManager.KEY_ADD_AUDIO -> {
                     onPreferenceClickListener = Preference.OnPreferenceClickListener {
-                        var prefence: MyPreference
-                        prefence = MyPreference(requireContext())
+                       job?.cancel()
+                        AUDIO_CHANGED = !AUDIO_CHANGED
+                        ADD_AUDIO_CHANGED = true
 
-                        prefence.setBoolen(!prefence.getBoolen())
+                        job = CoroutineScope(Dispatchers.Default).launch{
+                            MusicStore.initInstance(context)
+                        }
                         true
                     }
                 }

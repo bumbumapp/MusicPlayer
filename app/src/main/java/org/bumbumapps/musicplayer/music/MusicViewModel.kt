@@ -24,6 +24,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import org.bumbumapps.musicplayer.Globals.ADD_AUDIO_CHANGED
 
 class MusicViewModel : ViewModel() {
     private val mLoaderResponse = MutableLiveData<MusicStore.Response?>(null)
@@ -36,7 +37,7 @@ class MusicViewModel : ViewModel() {
      * fragment navigated to and because SnackBars will have the best UX here.
      */
     fun loadMusic(context: Context) {
-        if (mLoaderResponse.value != null || isBusy) {
+        if ((mLoaderResponse.value != null || isBusy) && !ADD_AUDIO_CHANGED) {
             return
         }
 
