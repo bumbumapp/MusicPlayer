@@ -19,16 +19,17 @@ object AdsLoader {
         mInterstitialAd=null
         var adRequest = AdRequest.Builder().build()
 
-        InterstitialAd.load(context,"ca-app-pub-8444865753152507/4732066868", adRequest, object : InterstitialAdLoadCallback() {
+        InterstitialAd.load(context,context.getString(R.string.ads_interstial), adRequest, object : InterstitialAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
                 Log.d(TAG, adError.message)
                 mInterstitialAd = null
             }
 
-            override fun onAdLoaded(interstitialAd: InterstitialAd?) {
+            override fun onAdLoaded(p0: InterstitialAd) {
                 Log.d(TAG, "Ad was loaded.")
-                mInterstitialAd = interstitialAd
+                mInterstitialAd = p0
             }
+
         })
 
     }
@@ -43,9 +44,6 @@ object AdsLoader {
                         Timers.timer().start()
                         displayInterstitial(context)
                         unit()
-                    }
-                    override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
-                        Log.d("TAG", "Ad failed to show.")
                     }
                     override fun onAdShowedFullScreenContent() {
                         Log.d("TAG", "Ad showed fullscreen content.")
