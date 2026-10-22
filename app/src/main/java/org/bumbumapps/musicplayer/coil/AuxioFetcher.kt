@@ -107,17 +107,21 @@ abstract class AuxioFetcher : Fetcher {
     private fun fetchAospMetadataCovers(context: Context, album: Album): InputStream? {
         val extractor = MediaMetadataRetriever()
 
-        extractor.use { ext ->
+        // MediaMetadataRetriever only implements AutoCloseable from API 29, so `use {}` would
+        // throw ClassCastException on Android 7-9; release it explicitly instead.
+        try {
             // This call is time-consuming but it also doesn't seem to hold up the main thread,
             // so it's probably fine not to wrap it.
-            ext.setDataSource(context, album.songs[0].id.toURI())
+            extractor.setDataSource(context, album.songs[0].id.toURI())
 
             // Get the embedded picture from MediaMetadataRetriever, which will return a full
             // ByteArray of the cover without any compression artifacts.
             // If its null [a.k.a there is no embedded cover], than just ignore it and move on
-            return ext.embeddedPicture?.let { coverBytes ->
+            return extractor.embeddedPicture?.let { coverBytes ->
                 ByteArrayInputStream(coverBytes)
             }
+        } finally {
+            extractor.release()
         }
     }
 
