@@ -170,4 +170,5 @@
         <item quantity="one">%d Album</item>
         <item quantity="other">%d Albums</item>
     </plurals>
+    <string name="privacy_options">Privacy options</string>
 </resources>

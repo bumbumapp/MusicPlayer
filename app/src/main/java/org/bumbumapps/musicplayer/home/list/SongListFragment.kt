@@ -26,7 +26,6 @@ import android.view.ViewGroup
 import org.bumbumapps.musicplayer.AdsLoader
 import org.bumbumapps.musicplayer.Globals
 import org.bumbumapps.musicplayer.R
-import org.bumbumapps.musicplayer.Timers
 import org.bumbumapps.musicplayer.music.Song
 import org.bumbumapps.musicplayer.settings.SettingsManager
 import org.bumbumapps.musicplayer.ui.DisplayMode

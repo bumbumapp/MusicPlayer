@@ -2,111 +2,94 @@ apply plugin: "com.android.application"
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
 apply plugin: "androidx.navigation.safeargs.kotlin"
-apply plugin:  'com.google.gms.google-services'
-apply plugin:  'com.google.firebase.crashlytics'
+if (file('google-services.json').exists()) {
+    apply plugin: 'com.google.gms.google-services'
+    apply plugin: 'com.google.firebase.crashlytics'
+}
 
 android {
-    compileSdkVersion 34
-    buildToolsVersion "31.0.0"
+    namespace 'org.bumbumapps.musicplayer'
+    compileSdk 36
 
     defaultConfig {
         applicationId "org.bumbumapps.musicplayer"
-        versionName "2.3.7"
-        versionCode 10
+        versionName "2.4.0"
+        versionCode 12
 
-        minSdkVersion 21
-        targetSdkVersion 34
+        minSdk 24 // play-services-ads 25 requires 24
+        targetSdk 36
+    }
 
-        buildFeatures {
-            dataBinding true
-        }
+    buildFeatures {
+        dataBinding true
+        buildConfig true
+        resValues true
     }
 
     buildTypes {
         debug {
             debuggable true
+            // Google sample IDs: debug builds never request live ads.
+            manifestPlaceholders = [admobAppId: "ca-app-pub-3940256099942544~3347511713"]
+            resValue "string", "admob_interstitial_id", "ca-app-pub-3940256099942544/1033173712"
         }
 
         release {
+            manifestPlaceholders = [admobAppId: "ca-app-pub-8444865753152507~6932205868"]
+            resValue "string", "admob_interstitial_id", "ca-app-pub-8444865753152507/4732066868"
             minifyEnabled true
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
     }
 
-    // ExoPlayer needs Java 8 to compile.
-
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
         freeCompilerArgs += "-Xjvm-default=all"
     }
 
     compileOptions {
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    lint {
+        abortOnError false
     }
 }
-
-
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
-    // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.core:core-ktx:1.17.0"
+    implementation "androidx.activity:activity-ktx:1.11.0"
+    implementation 'androidx.fragment:fragment-ktx:1.8.9'
+    implementation "androidx.appcompat:appcompat:1.7.1"
 
-    // --- SUPPORT ---
+    implementation "androidx.recyclerview:recyclerview:1.4.0"
+    implementation "androidx.constraintlayout:constraintlayout:2.2.1"
+    implementation "androidx.dynamicanimation:dynamicanimation:1.1.0"
+    implementation "androidx.viewpager2:viewpager2:1.1.0"
 
-    // General
-    implementation "androidx.core:core-ktx:1.7.0"
-    implementation "androidx.activity:activity-ktx:1.4.0"
-    implementation 'androidx.fragment:fragment-ktx:1.4.0'
-
-    // UI
-    implementation "androidx.recyclerview:recyclerview:1.2.1"
-    implementation "androidx.constraintlayout:constraintlayout:2.1.2"
-    implementation "androidx.dynamicanimation:dynamicanimation:1.0.0"
-    implementation "androidx.viewpager2:viewpager2:1.1.0-beta01"
-
-    // Lifecycle
-    def lifecycle_version = "2.4.0"
+    def lifecycle_version = "2.9.4"
     implementation "androidx.lifecycle:lifecycle-common:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 
-    // Navigation
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
 
-    // Media
-    // TODO: Migrate to Media3
-    implementation "androidx.media:media:1.4.3"
+    implementation "androidx.media:media:1.7.1"
+    implementation "androidx.preference:preference-ktx:1.2.1"
 
-    // Preferences
-    implementation "androidx.preference:preference-ktx:1.1.1"
+    implementation "com.google.android.exoplayer:exoplayer-core:2.19.1"
 
-    // --- THIRD PARTY ---
+    implementation 'io.coil-kt:coil:2.7.0'
 
-    // ExoPlayer
-    implementation "com.google.android.exoplayer:exoplayer-core:2.16.1"
+    implementation 'com.google.android.material:material:1.13.0'
+    implementation platform('com.google.firebase:firebase-bom:35.1.0')
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.android.gms:play-services-ads:25.5.0'
+    implementation 'com.google.android.ump:user-messaging-platform:4.0.0'
 
-    // Image loading
-    implementation 'io.coil-kt:coil:2.0.0-alpha05'
-
-    // restart
-    // Material
-    implementation 'com.google.android.material:material:1.5.0-rc01'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.4'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.4'
-    implementation platform('com.google.firebase:firebase-bom:31.2.2')
-
-    // Add the dependencies for the Crashlytics and Analytics libraries
-    // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation 'com.google.firebase:firebase-crashlytics-ktx'
-    implementation 'com.google.android.gms:play-services-ads:21.5.0'
-
+    testImplementation 'junit:junit:4.13.2'
 }
-
-
-//}

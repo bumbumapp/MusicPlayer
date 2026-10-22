@@ -156,6 +156,12 @@
 
         <Preference
             app:iconSpaceReserved="false"
+            app:isPreferenceVisible="false"
+            app:key="privacy_options"
+            app:title="@string/privacy_options" />
+
+        <Preference
+            app:iconSpaceReserved="false"
             app:key="app_licence"
             app:summary="GPL-3.0 license"
             app:title="App Licence" />

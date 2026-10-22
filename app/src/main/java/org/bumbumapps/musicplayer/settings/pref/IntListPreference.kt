@@ -96,7 +96,7 @@ class IntListPreference @JvmOverloads constructor(
     }
 
     private inner class IntListSummaryProvider : SummaryProvider<IntListPreference> {
-        override fun provideSummary(preference: IntListPreference?): CharSequence {
+        override fun provideSummary(preference: IntListPreference): CharSequence {
             val index = getValueIndex()
 
             if (index != -1) {

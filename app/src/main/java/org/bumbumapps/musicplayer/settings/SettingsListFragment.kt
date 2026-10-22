@@ -18,6 +18,7 @@
 
 package org.bumbumapps.musicplayer.settings
 
+import org.bumbumapps.musicplayer.AdsConsent
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -83,7 +84,7 @@ class SettingsListFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.prefs_main, rootKey)
     }
 
-    override fun onDisplayPreferenceDialog(preference: Preference?) {
+    override fun onDisplayPreferenceDialog(preference: Preference) {
         if (preference is IntListPreference) {
             IntListPrefDialog.from(preference).show(childFragmentManager, IntListPrefDialog.TAG)
         } else {
@@ -187,6 +188,14 @@ class SettingsListFragment : PreferenceFragmentCompat() {
                             requireContext().showToast(R.string.lbl_state_saved)
                         }
 
+                        true
+                    }
+                }
+
+                "privacy_options" -> {
+                    isVisible = AdsConsent.isPrivacyOptionsRequired(requireContext())
+                    onPreferenceClickListener = Preference.OnPreferenceClickListener {
+                        AdsConsent.showPrivacyOptions(requireActivity())
                         true
                     }
                 }

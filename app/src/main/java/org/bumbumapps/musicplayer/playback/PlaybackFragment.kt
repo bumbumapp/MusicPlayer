@@ -30,7 +30,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import org.bumbumapps.musicplayer.*
-import org.bumbumapps.musicplayer.Globals.TIMER_FINISHED
 import org.bumbumapps.musicplayer.databinding.FragmentPlaybackBinding
 import org.bumbumapps.musicplayer.detail.DetailViewModel
 import org.bumbumapps.musicplayer.playback.state.LoopMode
@@ -83,7 +82,7 @@ class PlaybackFragment : Fragment() {
                 navigateUp()
             }
             binding.playbackPlayPause.setOnClickListener {
-                AdsLoader.showAds(requireContext()){playbackModel.invertPlayingStatus()}
+                playbackModel.invertPlayingStatus()
             }
             setOnMenuItemClickListener { item ->
                 if (item.itemId == R.id.action_queue) {

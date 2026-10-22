@@ -18,6 +18,7 @@
 
 package org.bumbumapps.musicplayer
 
+import androidx.core.content.ContextCompat
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -61,7 +62,21 @@ class MainActivity : AppCompatActivity() {
             binding.root.fitsSystemWindows = true
         }
 
+        // Ads only after UMP consent allows requests; interstitial is preloaded once.
+        AdsConsent.gather(this) { AdsLoader.displayInterstitial(this) }
+        requestNotificationPermission()
+
         logD("Activity created.")
+    }
+
+    /** Android 13+: the playback notification needs the runtime permission. */
+    private fun requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS)
+            != android.content.pm.PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 42)
+        }
     }
 
     override fun onStart() {
@@ -73,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         onNewIntent(intent)
     }
 
-    override fun onNewIntent(intent: Intent?) {
+    override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
 
         // If this intent is a valid view intent that has not been used already, give it

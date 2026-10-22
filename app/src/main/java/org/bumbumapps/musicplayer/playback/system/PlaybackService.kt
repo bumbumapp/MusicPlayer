@@ -25,6 +25,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.ServiceInfo
+import androidx.core.app.ServiceCompat
+import androidx.core.content.ContextCompat
 import android.media.AudioManager
 import android.os.Build
 import android.os.IBinder
@@ -153,7 +155,10 @@ class PlaybackService : Service(), Player.Listener, PlaybackStateManager.Callbac
 
             addAction(WidgetProvider.ACTION_WIDGET_UPDATE)
 
-            registerReceiver(systemReceiver, this)
+            // Android 14+ requires an explicit export flag for runtime receivers.
+            ContextCompat.registerReceiver(
+                this@PlaybackService, systemReceiver, this, ContextCompat.RECEIVER_NOT_EXPORTED
+            )
         }
 
         // --- NOTIFICATION SETUP ---
@@ -390,16 +395,20 @@ class PlaybackService : Service(), Player.Listener, PlaybackStateManager.Callbac
 
             if (!isForeground) {
                 // Specify that this is a media service, if supported.
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    startForeground(
-                        PlaybackNotification.NOTIFICATION_ID, notification.build(),
+                try {
+                    ServiceCompat.startForeground(
+                        this, PlaybackNotification.NOTIFICATION_ID, notification.build(),
                         ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK
                     )
-                } else {
-                    startForeground(PlaybackNotification.NOTIFICATION_ID, notification.build())
+                    isForeground = true
+                } catch (e: IllegalStateException) {
+                    // ForegroundServiceStartNotAllowedException (background start, Android 12+):
+                    // keep playing and just post the notification.
+                    logD("startForeground refused: $e")
+                    notificationManager.notify(
+                        PlaybackNotification.NOTIFICATION_ID, notification.build()
+                    )
                 }
-
-                isForeground = true
             } else {
                 // If we are already in foreground just update the notification
                 notificationManager.notify(
@@ -413,7 +422,7 @@ class PlaybackService : Service(), Player.Listener, PlaybackStateManager.Callbac
      * Stop the foreground state and hide the notification
      */
     private fun stopForegroundAndNotification() {
-        stopForeground(true)
+        ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
         notificationManager.cancel(PlaybackNotification.NOTIFICATION_ID)
 
         isForeground = false

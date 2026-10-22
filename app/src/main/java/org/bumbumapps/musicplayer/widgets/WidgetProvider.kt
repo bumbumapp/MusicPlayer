@@ -159,7 +159,7 @@ class WidgetProvider : AppWidgetProvider() {
     private fun requestUpdate(context: Context) {
         logD("Sending update intent to PlaybackService")
 
-        val intent = Intent(ACTION_WIDGET_UPDATE)
+        val intent = Intent(ACTION_WIDGET_UPDATE).setPackage(context.packageName)
             .addFlags(Intent.FLAG_RECEIVER_REGISTERED_ONLY)
 
         context.sendBroadcast(intent)

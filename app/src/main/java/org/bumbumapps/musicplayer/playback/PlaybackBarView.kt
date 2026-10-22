@@ -13,7 +13,6 @@ import com.google.android.material.color.MaterialColors
 import org.bumbumapps.musicplayer.AdsLoader
 import org.bumbumapps.musicplayer.Globals
 import org.bumbumapps.musicplayer.R
-import org.bumbumapps.musicplayer.Timers
 import org.bumbumapps.musicplayer.databinding.ViewPlaybackBarBinding
 import org.bumbumapps.musicplayer.detail.DetailViewModel
 import org.bumbumapps.musicplayer.music.Song
@@ -71,7 +70,7 @@ class PlaybackBarView @JvmOverloads constructor(
         }
 
         binding.playbackPlayPause.setOnClickListener {
-            AdsLoader.showAds(context){playbackModel.invertPlayingStatus()}
+            playbackModel.invertPlayingStatus()
 
         }
 

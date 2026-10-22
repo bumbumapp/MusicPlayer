@@ -65,7 +65,8 @@ fun <T : Any> Context.getSystemServiceSafe(serviceClass: KClass<T>): T {
  */
 fun Context.newBroadcastIntent(what: String): PendingIntent {
     return PendingIntent.getBroadcast(
-        this, INTENT_REQUEST_CODE, Intent(what),
+        // Explicit package: the service registers its receiver as NOT_EXPORTED.
+        this, INTENT_REQUEST_CODE, Intent(what).setPackage(packageName),
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             PendingIntent.FLAG_IMMUTABLE
         else 0

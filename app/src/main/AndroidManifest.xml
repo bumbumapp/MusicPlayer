@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="org.bumbumapps.musicplayer">
+    xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <!-- Workaround for ExoPlayer requiring unnecessary permissions -->
@@ -25,6 +26,7 @@
         android:label="@string/info_app_name"
         android:roundIcon="@mipmap/app_logo_round"
         android:supportsRtl="true"
+        android:enableOnBackInvokedCallback="false"
         android:theme="@style/Theme.Auxio.App">
 
         <activity
@@ -56,6 +58,7 @@
         <service
             android:name="org.bumbumapps.musicplayer.playback.system.PlaybackService"
             android:foregroundServiceType="mediaPlayback"
+            android:exported="false"
             android:icon="@mipmap/app_logo"
             android:roundIcon="@mipmap/app_logo_round" />
 
@@ -74,7 +77,7 @@
         </receiver>
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/app_id"/>
+            android:value="${admobAppId}"/>
         <meta-data
             android:name="firebase_crashlytics_collection_enabled"
             android:value="true" />
