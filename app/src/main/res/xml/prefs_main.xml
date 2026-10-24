@@ -5,6 +5,15 @@
         app:title="@string/set_ui">
 
 
+        <org.bumbumapps.musicplayer.settings.pref.IntListPreference
+            app:defaultValue="@integer/theme_dark"
+            app:entries="@array/entires_theme"
+            app:entryValues="@array/values_theme"
+            app:icon="@drawable/ic_night"
+            app:key="KEY_THEME2"
+            app:title="@string/set_theme"
+            app:useSimpleSummaryProvider="true" />
+
         <Preference
             app:isPreferenceVisible="@bool/enable_theme_settings"
             app:icon="@drawable/ic_accent"
@@ -48,7 +57,7 @@
             app:title="@string/set_quality_covers" />
 
         <SwitchPreferenceCompat
-            app:defaultValue="false"
+            app:defaultValue="true"
             app:dependency="KEY_SHOW_COVERS"
             app:iconSpaceReserved="false"
             app:key="auxio_round_covers"

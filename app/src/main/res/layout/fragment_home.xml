@@ -20,17 +20,30 @@
                 android:id="@+id/home_toolbar"
                 style="@style/Widget.Auxio.Toolbar"
                 app:menu="@menu/menu_home"
-                app:title="@string/info_app_name" />
+                app:title="@string/info_app_name"
+                app:titleTextAppearance="@style/TextAppearance.Auxio.ScreenTitle" />
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/home_tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_small"
                 android:background="@android:color/transparent"
-                app:tabContentStart="@dimen/spacing_medium"
+                app:tabContentStart="12dp"
                 app:tabGravity="start"
+                app:tabIndicator="@drawable/ui_tab_pill"
+                app:tabIndicatorAnimationMode="elastic"
+                app:tabIndicatorColor="?attr/colorPrimary"
+                app:tabIndicatorFullWidth="true"
+                app:tabIndicatorGravity="stretch"
+                app:tabMinWidth="0dp"
                 app:tabMode="scrollable"
-                app:tabTextAppearance="@style/TextAppearance.Auxio.LabelLarger" />
+                app:tabPaddingEnd="20dp"
+                app:tabPaddingStart="20dp"
+                app:tabRippleColor="@android:color/transparent"
+                app:tabSelectedTextColor="?attr/colorOnPrimary"
+                app:tabTextAppearance="@style/TextAppearance.Auxio.LabelLarger"
+                app:tabTextColor="?attr/colorOnSurfaceVariant" />
 
         </org.bumbumapps.musicplayer.ui.EdgeAppBarLayout>
 
@@ -57,7 +70,9 @@
                 android:layout_margin="@dimen/spacing_medium"
                 android:contentDescription="@string/desc_shuffle_all"
                 android:src="@drawable/ic_shuffle"
-                app:tint="?attr/colorOnPrimaryContainer" />
+                app:backgroundTint="?attr/colorPrimary"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Auxio.FloatingActionButton.PlayPause"
+                app:tint="?attr/colorOnPrimary" />
 
         </org.bumbumapps.musicplayer.home.FloatingActionButtonContainer>
 

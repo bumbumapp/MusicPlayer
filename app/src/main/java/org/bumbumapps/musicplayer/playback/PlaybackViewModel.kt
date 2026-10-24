@@ -336,7 +336,7 @@ class PlaybackViewModel : ViewModel(), PlaybackStateManager.Callback {
         mSong.value = playbackManager.song
         mPosition.value = playbackManager.position / 1000
         mParent.value = playbackManager.parent
-        mNextUp.value = playbackManager.queue
+        mNextUp.value = nextUpOf(playbackManager.queue, playbackManager.index)
         mMode.value = playbackManager.playbackMode
         mIsPlaying.value = playbackManager.isPlaying
         mIsShuffling.value = playbackManager.isShuffling
@@ -362,7 +362,7 @@ class PlaybackViewModel : ViewModel(), PlaybackStateManager.Callback {
     }
 
     override fun onQueueUpdate(queue: List<Song>, index: Int) {
-        mNextUp.value = queue.slice(index.inc() until queue.size)
+        mNextUp.value = nextUpOf(queue, index)
     }
 
     override fun onModeUpdate(mode: PlaybackMode) {
@@ -381,3 +381,10 @@ class PlaybackViewModel : ViewModel(), PlaybackStateManager.Callback {
         mLoopMode.value = loopMode
     }
 }
+
+/**
+ * The songs after the playing one. The queue screen and its drag/swipe index math rely on this
+ * never containing the current or already played songs (it used to after a state restore).
+ */
+fun nextUpOf(queue: List<Song>, index: Int): List<Song> =
+    if (index < 0) queue else queue.drop(index + 1)

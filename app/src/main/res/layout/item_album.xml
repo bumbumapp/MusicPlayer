@@ -15,7 +15,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_cover"
         style="@style/Widget.Auxio.Image.Small"
-        app:cardCornerRadius="50dp"
+        app:cardCornerRadius="@dimen/radius_cover_small"
+            app:cardElevation="0dp"
         android:outlineSpotShadowColor="@android:color/transparent"
         android:outlineAmbientShadowColor="@android:color/transparent"
         tools:ignore="MissingConstraints">

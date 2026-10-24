@@ -19,6 +19,7 @@
 package org.bumbumapps.musicplayer
 
 import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
 import coil.ImageLoader
 import coil.ImageLoaderFactory
 import coil.request.CachePolicy
@@ -38,6 +39,9 @@ class AuxioApp : Application(), ImageLoaderFactory {
         // Init SettingsManager here so that there aren't any race conditions
         // [e.g PlaybackService gets SettingsManager before activity can init SettingsManager]
         SettingsManager.init(applicationContext)
+        // Apply the night mode before the first activity exists, so it is not recreated on launch.
+        AppCompatDelegate.setDefaultNightMode(SettingsManager.getInstance().theme)
+        ReviewPrompt.onAppLaunch(this)
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
     }
 

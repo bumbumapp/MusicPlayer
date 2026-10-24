@@ -10,7 +10,7 @@
     <dimen name="size_btn_small">48dp</dimen>
     <dimen name="size_btn_large">64dp</dimen>
 
-    <dimen name="size_cover_compact">48dp</dimen>
+    <dimen name="size_cover_compact">52dp</dimen>
     <dimen name="size_cover_normal">56dp</dimen>
     <dimen name="size_cover_large">128dp</dimen>
     <dimen name="size_cover_mid_huge">192dp</dimen>
@@ -39,4 +39,8 @@
     <dimen name="widget_height_min">110dp</dimen>
     <dimen name="widget_width_def">@dimen/widget_width_min</dimen>
     <dimen name="widget_height_def">@dimen/widget_height_min</dimen>
+    <dimen name="radius_cover_small">14dp</dimen>
+    <dimen name="radius_cover_large">28dp</dimen>
+    <dimen name="radius_card">24dp</dimen>
+    <dimen name="item_padding_vertical">10dp</dimen>
 </resources>

@@ -71,4 +71,14 @@
     <plurals name="fmt_album_count">
         <item quantity="other">%d Album</item>
     </plurals>
+    <string name="lbl_more_options">Opsi lainnya</string>
+    <string name="lbl_share_song">Bagikan lagu</string>
+    <string name="lbl_sleep_timer">Timer tidur</string>
+    <string name="lbl_sleep_timer_off">Matikan timer</string>
+    <string name="fmt_sleep_minutes">%d menit</string>
+    <string name="fmt_sleep_set">Musik akan berhenti dalam %d menit</string>
+    <string name="fmt_sleep_remaining">Timer tidur · berhenti dalam %s</string>
+    <string name="lbl_sleep_cancelled">Timer tidur dimatikan</string>
+    <string name="err_share_song">Lagu ini tidak dapat dibagikan</string>
+    <string name="lbl_next_up">Berikutnya</string>
 </resources>

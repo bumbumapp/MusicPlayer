@@ -22,6 +22,9 @@ import org.bumbumapps.musicplayer.R
 
 val ACCENT_COUNT: Int get() = ACCENT_NAMES.size
 
+/** Aurora, the brand palette, is last so saved indices of the older accents stay valid. */
+const val ACCENT_DEFAULT = 16
+
 private val ACCENT_NAMES = arrayOf(
     R.string.clr_red,
     R.string.clr_pink,
@@ -39,6 +42,7 @@ private val ACCENT_NAMES = arrayOf(
     R.string.clr_orange,
     R.string.clr_brown,
     R.string.clr_grey,
+    R.string.clr_aurora,
 )
 
 private val ACCENT_THEMES = arrayOf(
@@ -58,6 +62,7 @@ private val ACCENT_THEMES = arrayOf(
     R.style.Theme_Auxio_Orange,
     R.style.Theme_Auxio_Brown,
     R.style.Theme_Auxio_Grey,
+    R.style.Theme_Auxio_Aurora,
 )
 
 private val ACCENT_BLACK_THEMES = arrayOf(
@@ -77,6 +82,7 @@ private val ACCENT_BLACK_THEMES = arrayOf(
     R.style.Theme_Auxio_Black_Orange,
     R.style.Theme_Auxio_Black_Brown,
     R.style.Theme_Auxio_Black_Grey,
+    R.style.Theme_Auxio_Black_Aurora,
 )
 
 private val ACCENT_PRIMARY_COLORS = arrayOf(
@@ -96,6 +102,7 @@ private val ACCENT_PRIMARY_COLORS = arrayOf(
     R.color.orange_primary,
     R.color.brown_primary,
     R.color.grey_primary,
+    R.color.aurora_grad_start,
 )
 
 /**

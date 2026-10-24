@@ -148,4 +148,14 @@
         <item quantity="other">%d Álbumes</item>
     </plurals>
     <string name="def_artist">Artista desconocido</string>
+    <string name="lbl_more_options">Más opciones</string>
+    <string name="lbl_share_song">Compartir canción</string>
+    <string name="lbl_sleep_timer">Temporizador</string>
+    <string name="lbl_sleep_timer_off">Desactivar temporizador</string>
+    <string name="fmt_sleep_minutes">%d minutos</string>
+    <string name="fmt_sleep_set">La música se detendrá en %d minutos</string>
+    <string name="fmt_sleep_remaining">Temporizador · se detiene en %s</string>
+    <string name="lbl_sleep_cancelled">Temporizador desactivado</string>
+    <string name="err_share_song">No se puede compartir esta canción</string>
+    <string name="lbl_next_up">A continuación</string>
 </resources>

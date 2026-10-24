@@ -43,25 +43,25 @@ import org.bumbumapps.musicplayer.settings.SettingsManager
  * Bind the album art for a [song].
  */
 @BindingAdapter("albumArt")
-fun ImageView.bindAlbumArt(song: Song?) = load(song, R.drawable.ic_album)
+fun ImageView.bindAlbumArt(song: Song?) = load(song, R.drawable.ui_cover_placeholder)
 
 /**
  * Bind the album art for an [album].
  */
 @BindingAdapter("albumArt")
-fun ImageView.bindAlbumArt(album: Album?) = load(album, R.drawable.ic_album)
+fun ImageView.bindAlbumArt(album: Album?) = load(album, R.drawable.ui_cover_placeholder)
 
 /**
  * Bind the image for an [artist]
  */
 @BindingAdapter("artistImage")
-fun ImageView.bindArtistImage(artist: Artist?) = load(artist, R.drawable.ic_artist)
+fun ImageView.bindArtistImage(artist: Artist?) = load(artist, R.drawable.ui_artist_placeholder)
 
 /**
  * Bind the image for a [genre]
  */
 @BindingAdapter("genreImage")
-fun ImageView.bindGenreImage(genre: Genre?) = load(genre, R.drawable.ic_genre)
+fun ImageView.bindGenreImage(genre: Genre?) = load(genre, R.drawable.ui_genre_placeholder)
 
 fun <T : Music> ImageView.load(music: T?, @DrawableRes error: Int) {
     dispose()

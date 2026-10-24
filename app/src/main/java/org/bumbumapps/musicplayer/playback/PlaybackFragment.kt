@@ -18,6 +18,13 @@
 
 package org.bumbumapps.musicplayer.playback
 
+import android.graphics.RenderEffect
+import android.graphics.Shader
+import android.os.Build
+import android.widget.Toast
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import org.bumbumapps.musicplayer.util.shareSong
+import org.bumbumapps.musicplayer.util.showToast
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -85,25 +92,45 @@ class PlaybackFragment : Fragment() {
                 playbackModel.invertPlayingStatus()
             }
             setOnMenuItemClickListener { item ->
-                if (item.itemId == R.id.action_queue) {
-                    findNavController().navigate(MainFragmentDirections.actionShowQueue())
-
-                    true
-                } else {
-                    false
+                when (item.itemId) {
+                    R.id.action_queue -> {
+                        findNavController().navigate(MainFragmentDirections.actionShowQueue())
+                        true
+                    }
+                    R.id.action_sleep_timer -> {
+                        showSleepTimerDialog()
+                        true
+                    }
+                    else -> false
                 }
             }
 
             queueItem = menu.findItem(R.id.action_queue)
         }
 
+        binding.playbackShare?.setOnClickListener {
+            playbackModel.song.value?.let { requireContext().shareSong(it) }
+        }
+
+        // Soft-focus the cover backdrop where the platform can blur views.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            binding.playbackBackdrop?.setRenderEffect(
+                RenderEffect.createBlurEffect(90f, 90f, Shader.TileMode.CLAMP)
+            )
+        }
+
+        SleepTimer.active.observe(viewLifecycleOwner) { active ->
+            binding.playbackToolbar.menu.findItem(R.id.action_sleep_timer)
+                ?.setIcon(if (active) R.drawable.ic_timer_on else R.drawable.ic_timer)
+        }
+
         // Make marquee of song title work
         binding.playbackSong.isSelected = true
         binding.playbackSeekBar.onConfirmListener = playbackModel::setPosition
 
-        binding.playbackPlayPause.post {
-            binding.playbackPlayPause.stateListAnimator = null
-        }
+        // Capture the view: the binding is gone if the view is destroyed before this runs.
+        val playPause = binding.playbackPlayPause
+        playPause.post { playPause.stateListAnimator = null }
 
         // --- VIEWMODEL SETUP --
 
@@ -167,6 +194,37 @@ class PlaybackFragment : Fragment() {
     override fun onDestroyView() {
 
         super.onDestroyView()
+    }
+
+    private fun showSleepTimerDialog() {
+        val ctx = requireContext()
+        val minutes = SleepTimer.OPTIONS_MINUTES
+        val labels = minutes.map { ctx.getString(R.string.fmt_sleep_minutes, it) }.toMutableList()
+        if (SleepTimer.isActive) {
+            labels.add(0, ctx.getString(R.string.lbl_sleep_timer_off))
+        }
+        val title = if (SleepTimer.isActive) {
+            ctx.getString(R.string.fmt_sleep_remaining, SleepTimer.format(SleepTimer.remainingMs()))
+        } else {
+            ctx.getString(R.string.lbl_sleep_timer)
+        }
+
+        MaterialAlertDialogBuilder(ctx)
+            .setTitle(title)
+            .setItems(labels.toTypedArray()) { _, which ->
+                val index = if (SleepTimer.isActive) which - 1 else which
+                if (index < 0) {
+                    SleepTimer.cancel()
+                    ctx.showToast(R.string.lbl_sleep_cancelled)
+                } else {
+                    SleepTimer.start(minutes[index])
+                    Toast.makeText(
+                        ctx, ctx.getString(R.string.fmt_sleep_set, minutes[index]), Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
     }
 
     private fun navigateUp() {

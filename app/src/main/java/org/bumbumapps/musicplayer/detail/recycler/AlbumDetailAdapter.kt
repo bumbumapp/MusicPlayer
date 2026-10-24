@@ -152,13 +152,9 @@ class AlbumDetailAdapter(
                 }
             }
 
-            binding.detailInfo.text = binding.detailInfo.context.getString(
-                R.string.fmt_three,
-                data.year.toString(),
-                binding.detailInfo.context.getPlural(
-                    R.plurals.fmt_song_count,
-                    data.songs.size
-                ),
+            binding.detailInfo.text = albumInfoLine(
+                data.year,
+                binding.detailInfo.context.getPlural(R.plurals.fmt_song_count, data.songs.size),
                 data.totalDuration
             )
 
@@ -192,3 +188,10 @@ class AlbumDetailAdapter(
         const val ALBUM_SONG_ITEM_TYPE = 0xA007
     }
 }
+
+/**
+ * "2024 • 3 Songs • 1:15" for the album header. Albums without a year in their tags have year 0,
+ * which is left out instead of showing "0".
+ */
+fun albumInfoLine(year: Int, songCount: String, duration: String): String =
+    listOfNotNull(year.takeIf { it > 0 }?.toString(), songCount, duration).joinToString(" • ")

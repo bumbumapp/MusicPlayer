@@ -67,4 +67,8 @@
     <style name="Theme.Auxio.Black.Grey" parent="Theme.Auxio.Grey">
         <item name="colorSurface">@android:color/black</item>
     </style>
+
+    <style name="Theme.Auxio.Black.Aurora" parent="Theme.Auxio.Aurora">
+        <item name="colorSurface">@android:color/black</item>
+    </style>
 </resources>

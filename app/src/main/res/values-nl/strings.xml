@@ -145,4 +145,14 @@
         <item quantity="other">%d Albums</item>
     </plurals>
     <string name="def_artist">Onbekend Artist</string>
+    <string name="lbl_more_options">Meer opties</string>
+    <string name="lbl_share_song">Nummer delen</string>
+    <string name="lbl_sleep_timer">Slaaptimer</string>
+    <string name="lbl_sleep_timer_off">Timer uitzetten</string>
+    <string name="fmt_sleep_minutes">%d minuten</string>
+    <string name="fmt_sleep_set">Muziek stopt over %d minuten</string>
+    <string name="fmt_sleep_remaining">Slaaptimer · stopt over %s</string>
+    <string name="lbl_sleep_cancelled">Slaaptimer uitgezet</string>
+    <string name="err_share_song">Dit nummer kan niet worden gedeeld</string>
+    <string name="lbl_next_up">Hierna</string>
 </resources>

@@ -59,7 +59,10 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/ui_ripple</item>
-        <item name="android:padding">@dimen/spacing_medium</item>
+        <item name="android:paddingStart">@dimen/spacing_medium</item>
+        <item name="android:paddingEnd">@dimen/spacing_small</item>
+        <item name="android:paddingTop">@dimen/item_padding_vertical</item>
+        <item name="android:paddingBottom">@dimen/item_padding_vertical</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
     </style>
@@ -86,7 +89,8 @@
     </style>
 
     <style name="Widget.Auxio.TextView.Item.Secondary" parent="Widget.Auxio.TextView.Item.Base">
-        <item name="android:textAppearance">@style/TextAppearance.Auxio.TitleSmall</item>
+        <item name="android:textAppearance">@style/TextAppearance.Auxio.BodyMedium</item>
+        <item name="android:layout_marginTop">2dp</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
@@ -120,12 +124,13 @@
 
     <style name="Widget.Auxio.TextView.Header" parent="Widget.Auxio.TextView.Base">
         <item name="android:paddingStart">@dimen/spacing_medium</item>
-        <item name="android:paddingTop">@dimen/spacing_small</item>
+        <item name="android:paddingTop">20dp</item>
         <item name="android:paddingBottom">@dimen/spacing_small</item>
         <item name="android:paddingEnd">@dimen/spacing_medium</item>
         <item name="android:minHeight">@dimen/size_btn_small</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textAppearance">@style/TextAppearance.Auxio.TitleSmallish</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
     </style>
 
     <style name="Widget.Auxio.TextView.Detail" parent="Widget.Auxio.TextView.Base">
@@ -178,5 +183,30 @@
 
     <style name="ShapeAppearance.Auxio.FloatingActionButton.PlayPause" parent="">
         <item name="cornerSize">50%</item>
+    </style>
+
+    <!-- Detail header cover on tall phones -->
+    <style name="Widget.Auxio.Image.Detail" parent="">
+        <item name="android:layout_width">232dp</item>
+        <item name="android:layout_height">232dp</item>
+    </style>
+
+    <!-- Filled pill button in the brand gradient -->
+    <style name="Widget.Auxio.Button.Gradient" parent="Widget.Material3.Button">
+        <item name="android:textAppearance">@style/TextAppearance.Auxio.LabelLarger</item>
+        <item name="android:background">@drawable/ui_pill_gradient</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="iconTint">@android:color/white</item>
+        <item name="iconGravity">textStart</item>
+    </style>
+
+    <!-- Tonal pill button -->
+    <style name="Widget.Auxio.Button.Tonal" parent="Widget.Material3.Button.TonalButton">
+        <item name="android:textAppearance">@style/TextAppearance.Auxio.LabelLarger</item>
+        <item name="backgroundTint">?attr/colorSurfaceContainerHighest</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="iconTint">?attr/colorPrimary</item>
+        <item name="iconGravity">textStart</item>
     </style>
 </resources>

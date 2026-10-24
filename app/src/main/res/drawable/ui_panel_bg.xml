@@ -2,6 +2,9 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@android:id/background">
         <shape android:shape="rectangle">
+            <corners
+                android:topLeftRadius="@dimen/radius_card"
+                android:topRightRadius="@dimen/radius_card" />
             <solid android:color="?attr/colorSurface" />
         </shape>
     </item>

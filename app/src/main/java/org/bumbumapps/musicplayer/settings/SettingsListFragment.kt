@@ -116,6 +116,15 @@ class SettingsListFragment : PreferenceFragmentCompat() {
     private fun handlePreference(pref: Preference) {
         pref.apply {
             when (key) {
+                SettingsManager.KEY_THEME -> {
+                    setIcon(settingsManager.theme.toThemeIcon())
+
+                    onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, value ->
+                        AppCompatDelegate.setDefaultNightMode(value as Int)
+                        setIcon(value.toThemeIcon())
+                        true
+                    }
+                }
 
                 SettingsManager.KEY_BLACK_THEME -> {
                     onPreferenceClickListener = Preference.OnPreferenceClickListener {

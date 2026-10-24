@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
     private val playbackModel: PlaybackViewModel by viewModels()
 //    private lateinit var adview: AdView
    lateinit var prefence: MyPreference
+    private var lastSongId: Long? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +66,16 @@ class MainActivity : AppCompatActivity() {
         // Ads only after UMP consent allows requests; interstitial is preloaded once.
         AdsConsent.gather(this) { AdsLoader.displayInterstitial(this) }
         requestNotificationPermission()
+
+        // Count songs that start playing; ask for a rating once the app has proven itself.
+        playbackModel.song.observe(this) { song ->
+            if (song != null && song.id != lastSongId) {
+                if (lastSongId != null && ReviewPrompt.recordSongPlayed(this)) {
+                    binding.root.postDelayed({ ReviewPrompt.launch(this) }, 1500)
+                }
+                lastSongId = song.id
+            }
+        }
 
         logD("Activity created.")
     }
@@ -111,23 +122,17 @@ class MainActivity : AppCompatActivity() {
     private fun setupTheme() {
         val settingsManager = SettingsManager.getInstance()
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            // Android 12, let dynamic colors be our accent and only enable the black theme option
-            if (isNight && settingsManager.useBlackTheme) {
-                setTheme(R.style.Theme_Auxio_Black)
-            }
-        } else {
-            // Below android 12, load the accent and enable theme customization
-            AppCompatDelegate.setDefaultNightMode(settingsManager.theme)
-            val newAccent = Accent.set(settingsManager.accent)
+        // The Aurora brand palette (or the accent the user picked) is used on every Android
+        // version; dark is the default mode.
+        AppCompatDelegate.setDefaultNightMode(settingsManager.theme)
+        val newAccent = Accent.set(settingsManager.accent)
 
-            // The black theme has a completely separate set of styles since style attributes cannot
-            // be modified at runtime.
-            if (isNight && settingsManager.useBlackTheme) {
-                setTheme(newAccent.blackTheme)
-            } else {
-                setTheme(newAccent.theme)
-            }
+        // The black theme has a completely separate set of styles since style attributes cannot
+        // be modified at runtime.
+        if (isNight && settingsManager.useBlackTheme) {
+            setTheme(newAccent.blackTheme)
+        } else {
+            setTheme(newAccent.theme)
         }
     }
 

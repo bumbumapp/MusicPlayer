@@ -21,7 +21,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
 import androidx.customview.widget.ViewDragHelper
 import androidx.lifecycle.LifecycleOwner
+import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.MaterialShapeDrawable
+import com.google.android.material.shape.ShapeAppearanceModel
 import org.bumbumapps.musicplayer.BuildConfig
 import org.bumbumapps.musicplayer.R
 import org.bumbumapps.musicplayer.detail.DetailViewModel
@@ -118,8 +120,15 @@ class PlaybackLayout @JvmOverloads constructor(
             isFocusableInTouchMode = false
 
             playbackContainerBg = MaterialShapeDrawable.createWithElevationOverlay(context).apply {
-                fillColor = ColorStateList.valueOf(R.attr.colorSurface.resolveAttr(context))
+                fillColor = ColorStateList.valueOf(
+                    com.google.android.material.R.attr.colorSurfaceContainerHigh.resolveAttr(context)
+                )
                 elevation = resources.getDimensionPixelSize(R.dimen.elevation_normal).toFloat()
+                // Mini player is a rounded sheet sitting on top of the library.
+                shapeAppearanceModel = ShapeAppearanceModel.builder()
+                    .setTopLeftCorner(CornerFamily.ROUNDED, resources.getDimension(R.dimen.radius_card))
+                    .setTopRightCorner(CornerFamily.ROUNDED, resources.getDimension(R.dimen.radius_card))
+                    .build()
             }
 
             // The way we fade out the elevation overlay is not by actually reducing the elevation

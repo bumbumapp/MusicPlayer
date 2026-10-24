@@ -81,7 +81,15 @@ class SearchViewModel : ViewModel() {
             val sort = Sort.ByName(true)
             val results = mutableListOf<BaseModel>()
 
-            // A filter mode of null means to not filter at all.
+            // A filter mode of null means to not filter at all. Songs come first: they are what
+            // people search for most, and the rest used to push them below the keyboard.
+
+            if (mFilterMode == null || mFilterMode == DisplayMode.SHOW_SONGS) {
+                musicStore.songs.filterByOrNull(query)?.let { songs ->
+                    results.add(Header(-4, HeaderString.Single(R.string.lbl_songs)))
+                    results.addAll(sort.sortSongs(songs))
+                }
+            }
 
             if (mFilterMode == null || mFilterMode == DisplayMode.SHOW_ARTISTS) {
                 musicStore.artists.filterByOrNull(query)?.let { artists ->
@@ -101,13 +109,6 @@ class SearchViewModel : ViewModel() {
                 musicStore.genres.filterByOrNull(query)?.let { genres ->
                     results.add(Header(-3, HeaderString.Single(R.string.lbl_genres)))
                     results.addAll(sort.sortParents(genres))
-                }
-            }
-
-            if (mFilterMode == null || mFilterMode == DisplayMode.SHOW_SONGS) {
-                musicStore.songs.filterByOrNull(query)?.let { songs ->
-                    results.add(Header(-4, HeaderString.Single(R.string.lbl_songs)))
-                    results.addAll(sort.sortSongs(songs))
                 }
             }
 

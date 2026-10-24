@@ -385,4 +385,42 @@
     <color name="grey_on_surface_variant">#C8C8C8</color>
     <color name="grey_surface_inverse">#fafafa</color>
     <color name="grey_on_surface_inverse">#191919</color>
+
+    <!-- Aurora: the default bumbumapp Music Player palette -->
+    <color name="aurora_primary">#C4A6FF</color>
+    <color name="aurora_on_primary">#2F0F73</color>
+    <color name="aurora_primary_container">#4A2A9E</color>
+    <color name="aurora_on_primary_container">#E9DDFF</color>
+    <color name="aurora_primary_inverse">#6B3FE0</color>
+    <color name="aurora_secondary">#FF7AB6</color>
+    <color name="aurora_on_secondary">#5C0030</color>
+    <color name="aurora_secondary_container">#7A1D4B</color>
+    <color name="aurora_on_secondary_container">#FFD9E3</color>
+    <color name="aurora_tertiary">#5BE4FF</color>
+    <color name="aurora_on_tertiary">#00363D</color>
+    <color name="aurora_tertiary_container">#004F58</color>
+    <color name="aurora_on_tertiary_container">#B6F1FF</color>
+    <color name="aurora_error">#FFB4A9</color>
+    <color name="aurora_on_error">#680003</color>
+    <color name="aurora_error_container">#930006</color>
+    <color name="aurora_on_error_container">#FFDAD4</color>
+    <color name="aurora_surface">#0F0C17</color>
+    <color name="aurora_on_surface">#ECE6F3</color>
+    <color name="aurora_surface_variant">#2A2438</color>
+    <color name="aurora_on_surface_variant">#CBC3DA</color>
+    <color name="aurora_surface_inverse">#ECE6F3</color>
+    <color name="aurora_on_surface_inverse">#312D3A</color>
+    <color name="aurora_card">#1A1625</color>
+    <color name="aurora_card_stroke">#26FFFFFF</color>
+    <color name="aurora_scrim">#660F0C17</color>
+    <color name="aurora_scrim_mid">#B30F0C17</color>
+    <color name="aurora_scrim_end">#FF0F0C17</color>
+    <color name="aurora_surface_container_lowest">#0A0811</color>
+    <color name="aurora_surface_container_low">#15111F</color>
+    <color name="aurora_surface_container_high">#231E30</color>
+    <color name="aurora_surface_container_highest">#2C263A</color>
+    <color name="aurora_surface_container">#1A1625</color>
+    <color name="aurora_outline">#948DA3</color>
+    <color name="aurora_outline_variant">#2F2940</color>
+    <color name="aurora_track_inactive">#33FFFFFF</color>
 </resources>

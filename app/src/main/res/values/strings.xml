@@ -171,4 +171,14 @@
         <item quantity="other">%d Albums</item>
     </plurals>
     <string name="privacy_options">Privacy options</string>
+    <string name="lbl_more_options">More options</string>
+    <string name="lbl_share_song">Share song</string>
+    <string name="lbl_sleep_timer">Sleep timer</string>
+    <string name="lbl_sleep_timer_off">Turn off timer</string>
+    <string name="fmt_sleep_minutes">%d minutes</string>
+    <string name="fmt_sleep_set">Music will stop in %d minutes</string>
+    <string name="fmt_sleep_remaining">Sleep timer · stops in %s</string>
+    <string name="lbl_sleep_cancelled">Sleep timer turned off</string>
+    <string name="err_share_song">This song can\'t be shared</string>
+    <string name="lbl_next_up">Next up</string>
 </resources>

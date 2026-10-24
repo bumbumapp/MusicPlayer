@@ -11,9 +11,16 @@ object AdsLoader {
         InterstitialHelper.preload(context)
     }
 
+    /** Song taps in this process; the first one never shows an ad. */
+    private var plays = 0
+
+    /** The first play of a session goes straight to the music, so opening the app never hits an ad. */
+    fun adAllowedForPlay(playNumber: Int): Boolean = playNumber > 1
+
     fun showAds(context: Context, unit: () -> Unit) {
         val activity = context.findActivity()
-        if (activity == null) {
+        plays++
+        if (activity == null || !adAllowedForPlay(plays)) {
             unit()
         } else {
             InterstitialHelper.showIfReady(activity) { unit() }

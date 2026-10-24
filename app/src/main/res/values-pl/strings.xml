@@ -90,4 +90,14 @@
         <item quantity="few">%d Albumy</item>
         <item quantity="many">%d Albumów</item>
     </plurals>
+    <string name="lbl_more_options">Więcej opcji</string>
+    <string name="lbl_share_song">Udostępnij utwór</string>
+    <string name="lbl_sleep_timer">Wyłącznik czasowy</string>
+    <string name="lbl_sleep_timer_off">Wyłącz wyłącznik</string>
+    <string name="fmt_sleep_minutes">%d minut</string>
+    <string name="fmt_sleep_set">Muzyka zatrzyma się za %d minut</string>
+    <string name="fmt_sleep_remaining">Wyłącznik · zatrzyma za %s</string>
+    <string name="lbl_sleep_cancelled">Wyłącznik czasowy wyłączony</string>
+    <string name="err_share_song">Nie można udostępnić tego utworu</string>
+    <string name="lbl_next_up">Następne</string>
 </resources>

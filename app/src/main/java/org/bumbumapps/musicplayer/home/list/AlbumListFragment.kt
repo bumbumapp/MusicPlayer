@@ -27,7 +27,8 @@ import org.bumbumapps.musicplayer.R
 import org.bumbumapps.musicplayer.home.HomeFragmentDirections
 import org.bumbumapps.musicplayer.music.Album
 import org.bumbumapps.musicplayer.settings.SettingsManager
-import org.bumbumapps.musicplayer.ui.AlbumViewHolder
+import androidx.recyclerview.widget.GridLayoutManager
+import org.bumbumapps.musicplayer.ui.AlbumGridViewHolder
 import org.bumbumapps.musicplayer.ui.DisplayMode
 import org.bumbumapps.musicplayer.ui.Sort
 import org.bumbumapps.musicplayer.ui.newMenu
@@ -55,6 +56,14 @@ class AlbumListFragment : HomeListFragment() {
         )
 
         setupRecycler(R.id.home_album_list, adapter, homeModel.albums)
+
+        // Albums are a cover grid: two columns on phones, more on wider screens.
+        binding.homeRecycler.apply {
+            val spans = resources.getInteger(R.integer.recycler_spans)
+            layoutManager = GridLayoutManager(requireContext(), albumGridColumns(spans))
+            val pad = resources.getDimensionPixelSize(R.dimen.spacing_small)
+            setPadding(pad, pad, pad, paddingBottom)
+        }
 
         return binding.root
     }
@@ -84,14 +93,14 @@ class AlbumListFragment : HomeListFragment() {
     class AlbumAdapter(
         private val doOnClick: (data: Album) -> Unit,
         private val doOnLongClick: (view: View, data: Album) -> Unit,
-    ) : HomeAdapter<Album, AlbumViewHolder>() {
+    ) : HomeAdapter<Album, AlbumGridViewHolder>() {
         override fun getItemCount(): Int = data.size
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder {
-            return AlbumViewHolder.from(parent.context, doOnClick, doOnLongClick)
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumGridViewHolder {
+            return AlbumGridViewHolder.from(parent.context, doOnClick, doOnLongClick)
         }
 
-        override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
+        override fun onBindViewHolder(holder: AlbumGridViewHolder, position: Int) {
             val settingsManager = SettingsManager.getInstance()
 //            if (!settingsManager.addAudios) {
 //                if (!data[position].name.contains("Audio")) {
@@ -104,5 +113,10 @@ class AlbumListFragment : HomeListFragment() {
             holder.bind(data[position])
 //            }
         }
+    }
+
+    companion object {
+        /** Grid columns for the album tab given the list span count of the screen size. */
+        fun albumGridColumns(listSpans: Int): Int = maxOf(2, listSpans * 2)
     }
 }

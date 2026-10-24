@@ -22,6 +22,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
 import org.bumbumapps.musicplayer.accent.ACCENT_COUNT
+import org.bumbumapps.musicplayer.accent.ACCENT_DEFAULT
 import org.bumbumapps.musicplayer.accent.Accent
 import org.bumbumapps.musicplayer.playback.state.PlaybackMode
 
@@ -52,7 +53,7 @@ fun handleThemeCompat(prefs: SharedPreferences): Int {
         return newValue
     }
 
-    return prefs.getInt(SettingsManager.KEY_THEME, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+    return prefs.getInt(SettingsManager.KEY_THEME, AppCompatDelegate.MODE_NIGHT_YES)
 }
 
 fun handleAccentCompat(prefs: SharedPreferences): Accent {
@@ -110,7 +111,7 @@ fun handleAccentCompat(prefs: SharedPreferences): Accent {
         }
     }
 
-    return Accent(prefs.getInt(SettingsManager.KEY_ACCENT, 5))
+    return Accent(prefs.getInt(SettingsManager.KEY_ACCENT, ACCENT_DEFAULT))
 }
 
 fun handleSongPlayModeCompat(prefs: SharedPreferences): PlaybackMode {

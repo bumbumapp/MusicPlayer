@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Artist image placeholder in the brand gradient. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="315"
+                android:centerColor="@color/aurora_grad_mid"
+                android:endColor="@color/aurora_grad_end"
+                android:startColor="@color/aurora_grad_start" />
+        </shape>
+    </item>
+    <item>
+        <inset
+            android:drawable="@drawable/ui_artist_placeholder_glyph"
+            android:inset="28%" />
+    </item>
+</layer-list>

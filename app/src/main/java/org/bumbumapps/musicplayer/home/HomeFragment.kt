@@ -213,12 +213,14 @@ class HomeFragment : Fragment() {
                     id != R.id.option_sort_album
                 }
 
+                // Artists and genres sort by name only; show that choice instead of a lone
+                // "Ascending" checkbox.
                 DisplayMode.SHOW_ARTISTS -> updateSortMenu(sortItem, tab) { id ->
-                    id == R.id.option_sort_asc
+                    id == R.id.option_sort_asc || id == R.id.option_sort_name
                 }
 
                 DisplayMode.SHOW_GENRES -> updateSortMenu(sortItem, tab) { id ->
-                    id == R.id.option_sort_asc
+                    id == R.id.option_sort_asc || id == R.id.option_sort_name
                 }
             }
 

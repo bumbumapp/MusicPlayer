@@ -70,4 +70,14 @@
     <plurals name="fmt_album_count">
         <item quantity="other">%d 專輯</item>
     </plurals>
+    <string name="lbl_more_options">更多選項</string>
+    <string name="lbl_share_song">分享歌曲</string>
+    <string name="lbl_sleep_timer">睡眠定時</string>
+    <string name="lbl_sleep_timer_off">關閉定時</string>
+    <string name="fmt_sleep_minutes">%d 分鐘</string>
+    <string name="fmt_sleep_set">音樂將在 %d 分鐘後停止</string>
+    <string name="fmt_sleep_remaining">睡眠定時 · %s 後停止</string>
+    <string name="lbl_sleep_cancelled">已關閉睡眠定時</string>
+    <string name="err_share_song">無法分享這首歌曲</string>
+    <string name="lbl_next_up">接下來播放</string>
 </resources>

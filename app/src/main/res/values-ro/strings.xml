@@ -88,4 +88,14 @@
         <item quantity="few">%d Albume</item>
         <item quantity="other">%d Albume</item>
     </plurals>
+    <string name="lbl_more_options">Mai multe opțiuni</string>
+    <string name="lbl_share_song">Distribuie melodia</string>
+    <string name="lbl_sleep_timer">Temporizator de somn</string>
+    <string name="lbl_sleep_timer_off">Oprește temporizatorul</string>
+    <string name="fmt_sleep_minutes">%d minute</string>
+    <string name="fmt_sleep_set">Muzica se oprește în %d minute</string>
+    <string name="fmt_sleep_remaining">Temporizator · se oprește în %s</string>
+    <string name="lbl_sleep_cancelled">Temporizator oprit</string>
+    <string name="err_share_song">Această melodie nu poate fi distribuită</string>
+    <string name="lbl_next_up">Urmează</string>
 </resources>

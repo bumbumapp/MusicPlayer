@@ -72,4 +72,14 @@
         <item quantity="few">%d Альбомів</item>
         <item quantity="many">%d Альбомів</item>
     </plurals>
+    <string name="lbl_more_options">Більше</string>
+    <string name="lbl_share_song">Поділитися треком</string>
+    <string name="lbl_sleep_timer">Таймер сну</string>
+    <string name="lbl_sleep_timer_off">Вимкнути таймер</string>
+    <string name="fmt_sleep_minutes">%d хвилин</string>
+    <string name="fmt_sleep_set">Музика зупиниться через %d хвилин</string>
+    <string name="fmt_sleep_remaining">Таймер сну · зупинка через %s</string>
+    <string name="lbl_sleep_cancelled">Таймер сну вимкнено</string>
+    <string name="err_share_song">Цим треком не можна поділитися</string>
+    <string name="lbl_next_up">Далі</string>
 </resources>

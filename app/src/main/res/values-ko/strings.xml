@@ -72,4 +72,14 @@
         <item quantity="other">앨범</item>
     </plurals>
 
+    <string name="lbl_more_options">더보기</string>
+    <string name="lbl_share_song">노래 공유</string>
+    <string name="lbl_sleep_timer">취침 타이머</string>
+    <string name="lbl_sleep_timer_off">타이머 끄기</string>
+    <string name="fmt_sleep_minutes">%d분</string>
+    <string name="fmt_sleep_set">%d분 후 음악이 멈춥니다</string>
+    <string name="fmt_sleep_remaining">취침 타이머 · %s 후 정지</string>
+    <string name="lbl_sleep_cancelled">취침 타이머를 껐습니다</string>
+    <string name="err_share_song">이 노래는 공유할 수 없습니다</string>
+    <string name="lbl_next_up">다음 곡</string>
 </resources>

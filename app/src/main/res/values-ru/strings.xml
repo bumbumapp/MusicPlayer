@@ -172,4 +172,14 @@
         <item quantity="many">%d альбомов</item>
         <item quantity="other">%d альбомы</item>
     </plurals>
+    <string name="lbl_more_options">Ещё</string>
+    <string name="lbl_share_song">Поделиться треком</string>
+    <string name="lbl_sleep_timer">Таймер сна</string>
+    <string name="lbl_sleep_timer_off">Выключить таймер</string>
+    <string name="fmt_sleep_minutes">%d минут</string>
+    <string name="fmt_sleep_set">Музыка остановится через %d минут</string>
+    <string name="fmt_sleep_remaining">Таймер сна · остановка через %s</string>
+    <string name="lbl_sleep_cancelled">Таймер сна выключен</string>
+    <string name="err_share_song">Этим треком нельзя поделиться</string>
+    <string name="lbl_next_up">Далее</string>
 </resources>

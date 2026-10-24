@@ -34,6 +34,7 @@ import org.bumbumapps.musicplayer.music.Genre
 import org.bumbumapps.musicplayer.music.Song
 import org.bumbumapps.musicplayer.playback.PlaybackViewModel
 import org.bumbumapps.musicplayer.util.showToast
+import org.bumbumapps.musicplayer.util.shareSong
 
 /**
  * Extension method for creating and showing a new [ActionMenu].
@@ -56,7 +57,7 @@ fun Fragment.newMenu(anchor: View, data: BaseModel, flag: Int = ActionMenu.FLAG_
  * @author OxygenCobalt
  */
 class ActionMenu(
-    activity: AppCompatActivity,
+    private val activity: AppCompatActivity,
     anchor: View,
     private val data: BaseModel,
     private val flag: Int
@@ -173,6 +174,12 @@ class ActionMenu(
                     }
 
                     else -> {}
+                }
+            }
+
+            R.id.action_share -> {
+                if (data is Song) {
+                    activity.shareSong(data)
                 }
             }
 

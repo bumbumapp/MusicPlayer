@@ -18,6 +18,8 @@
 
 package org.bumbumapps.musicplayer.playback.queue
 
+import androidx.core.view.isVisible
+import org.bumbumapps.musicplayer.coil.bindAlbumArt
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -68,6 +70,15 @@ class QueueFragment : Fragment() {
         }
 
         // --- VIEWMODEL SETUP ----
+
+        playbackModel.song.observe(viewLifecycleOwner) { song ->
+            binding.queueNowPlaying.isVisible = song != null
+            if (song != null) {
+                binding.queueNowCover.bindAlbumArt(song)
+                binding.queueNowTitle.text = song.name
+                binding.queueNowArtist.text = song.album.artist.resolvedName
+            }
+        }
 
         playbackModel.nextUp.observe(viewLifecycleOwner) { queue ->
             if (queue.isEmpty()) {

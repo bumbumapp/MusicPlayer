@@ -166,4 +166,14 @@
     <string name="desc_tab_handle">Tab versetzen</string>
     <string name="def_artist">Unbekannter Künstler</string>
 
+    <string name="lbl_more_options">Weitere Optionen</string>
+    <string name="lbl_share_song">Titel teilen</string>
+    <string name="lbl_sleep_timer">Sleep-Timer</string>
+    <string name="lbl_sleep_timer_off">Timer ausschalten</string>
+    <string name="fmt_sleep_minutes">%d Minuten</string>
+    <string name="fmt_sleep_set">Musik stoppt in %d Minuten</string>
+    <string name="fmt_sleep_remaining">Sleep-Timer · stoppt in %s</string>
+    <string name="lbl_sleep_cancelled">Sleep-Timer ausgeschaltet</string>
+    <string name="err_share_song">Dieser Titel kann nicht geteilt werden</string>
+    <string name="lbl_next_up">Als Nächstes</string>
 </resources>

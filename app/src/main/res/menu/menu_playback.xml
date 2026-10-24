@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_sleep_timer"
+        android:icon="@drawable/ic_timer"
+        android:title="@string/lbl_sleep_timer"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/action_queue"
         android:icon="@drawable/ic_queue"
         android:title="@string/lbl_queue"

@@ -89,4 +89,14 @@
         <item quantity="other">%d Álbuns</item>
     </plurals>
     <string name="lbl_sort_asc">Ascendente</string>
+    <string name="lbl_more_options">Mais opções</string>
+    <string name="lbl_share_song">Compartilhar música</string>
+    <string name="lbl_sleep_timer">Timer para dormir</string>
+    <string name="lbl_sleep_timer_off">Desligar timer</string>
+    <string name="fmt_sleep_minutes">%d minutos</string>
+    <string name="fmt_sleep_set">A música vai parar em %d minutos</string>
+    <string name="fmt_sleep_remaining">Timer · para em %s</string>
+    <string name="lbl_sleep_cancelled">Timer desligado</string>
+    <string name="err_share_song">Não é possível compartilhar esta música</string>
+    <string name="lbl_next_up">A seguir</string>
 </resources>

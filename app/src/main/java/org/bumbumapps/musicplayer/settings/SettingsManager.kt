@@ -92,7 +92,7 @@ class SettingsManager private constructor(context: Context) :
 
     /** Whether to round album covers */
     val roundCovers: Boolean
-        get() = sharedPrefs.getBoolean(KEY_ROUND_COVERS, false)
+        get() = sharedPrefs.getBoolean(KEY_ROUND_COVERS, true)
 
     /** Whether to do Audio focus. */
     val doAudioFocus: Boolean

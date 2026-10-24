@@ -144,4 +144,14 @@
         <item quantity="few">"%d alba"</item>
         <item quantity="other">"%d alb"</item>
     </plurals>
+    <string name="lbl_more_options">Další možnosti</string>
+    <string name="lbl_share_song">Sdílet skladbu</string>
+    <string name="lbl_sleep_timer">Časovač vypnutí</string>
+    <string name="lbl_sleep_timer_off">Vypnout časovač</string>
+    <string name="fmt_sleep_minutes">%d minut</string>
+    <string name="fmt_sleep_set">Hudba se zastaví za %d minut</string>
+    <string name="fmt_sleep_remaining">Časovač · zastaví za %s</string>
+    <string name="lbl_sleep_cancelled">Časovač vypnut</string>
+    <string name="err_share_song">Tuto skladbu nelze sdílet</string>
+    <string name="lbl_next_up">Další v pořadí</string>
 </resources>

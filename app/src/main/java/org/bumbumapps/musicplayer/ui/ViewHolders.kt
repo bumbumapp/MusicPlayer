@@ -25,6 +25,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import org.bumbumapps.musicplayer.databinding.ItemActionHeaderBinding
 import org.bumbumapps.musicplayer.databinding.ItemAlbumBinding
+import org.bumbumapps.musicplayer.databinding.ItemAlbumGridBinding
 import org.bumbumapps.musicplayer.databinding.ItemArtistBinding
 import org.bumbumapps.musicplayer.databinding.ItemGenreBinding
 import org.bumbumapps.musicplayer.databinding.ItemHeaderBinding
@@ -96,11 +97,12 @@ abstract class BaseViewHolder<T : BaseModel>(
 class SongViewHolder private constructor(
     private val binding: ItemSongBinding,
     doOnClick: (data: Song) -> Unit,
-    doOnLongClick: (view: View, data: Song) -> Unit
-) : BaseViewHolder<Song>(binding, doOnClick, doOnLongClick) {
+    private val doOnMenu: (view: View, data: Song) -> Unit
+) : BaseViewHolder<Song>(binding, doOnClick, doOnMenu) {
 
     override fun onBind(data: Song) {
         binding.song = data
+        binding.songMenu.setOnClickListener { doOnMenu(it, data) }
 
         binding.songName.requestLayout()
         binding.songInfo.requestLayout()
@@ -152,6 +154,34 @@ class AlbumViewHolder private constructor(
         ): AlbumViewHolder {
             return AlbumViewHolder(
                 ItemAlbumBinding.inflate(context.inflater),
+                doOnClick, doOnLongClick
+            )
+        }
+    }
+}
+
+/**
+ * A large-cover grid cell for an [Album], used by the Albums tab.
+ */
+class AlbumGridViewHolder private constructor(
+    private val binding: ItemAlbumGridBinding,
+    doOnClick: (data: Album) -> Unit,
+    doOnLongClick: (view: View, data: Album) -> Unit
+) : BaseViewHolder<Album>(binding, doOnClick, doOnLongClick) {
+
+    override fun onBind(data: Album) {
+        binding.album = data
+        binding.albumName.requestLayout()
+    }
+
+    companion object {
+        fun from(
+            context: Context,
+            doOnClick: (data: Album) -> Unit,
+            doOnLongClick: (view: View, data: Album) -> Unit
+        ): AlbumGridViewHolder {
+            return AlbumGridViewHolder(
+                ItemAlbumGridBinding.inflate(context.inflater),
                 doOnClick, doOnLongClick
             )
         }
