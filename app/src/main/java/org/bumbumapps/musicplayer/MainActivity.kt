@@ -185,12 +185,4 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private const val KEY_INTENT_USED = BuildConfig.APPLICATION_ID + ".key.FILE_INTENT_USED"
     }
-
-    override fun onBackPressed() {
-        val fragment =
-            this.supportFragmentManager.findFragmentById(R.id.settings_fragment)
-        (fragment as? IOBackPressed)?.onBackPressed()?.not()?.let {
-            super.onBackPressed()
-        }
-    }
 }
