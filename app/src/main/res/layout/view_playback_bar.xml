@@ -86,6 +86,8 @@
             app:indicatorColor="?attr/colorPrimary"
             app:trackCornerRadius="2dp"
             app:trackThickness="3dp"
+            app:indicatorTrackGapSize="0dp"
+            app:trackStopIndicatorSize="0dp"
             app:trackColor="?attr/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

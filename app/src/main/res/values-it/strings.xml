@@ -100,4 +100,5 @@
     <string name="lbl_sleep_cancelled">Timer disattivato</string>
     <string name="err_share_song">Impossibile condividere questo brano</string>
     <string name="lbl_next_up">Prossimi brani</string>
+    <string name="lbl_sort_desc">Decrescente</string>
 </resources>

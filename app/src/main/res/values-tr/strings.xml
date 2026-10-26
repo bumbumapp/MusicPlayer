@@ -81,4 +81,5 @@
     <string name="lbl_sleep_cancelled">Uyku zamanlayıcısı kapatıldı</string>
     <string name="err_share_song">Bu şarkı paylaşılamıyor</string>
     <string name="lbl_next_up">Sıradakiler</string>
+    <string name="lbl_sort_desc">Azalan</string>
 </resources>

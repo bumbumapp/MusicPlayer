@@ -3,15 +3,19 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/option_sort_name"
+            android:icon="@drawable/ic_sort_name"
             android:title="@string/lbl_sort_name" />
         <item
             android:id="@+id/option_sort_artist"
+            android:icon="@drawable/ic_artist"
             android:title="@string/lbl_sort_artist" />
         <item
             android:id="@+id/option_sort_album"
+            android:icon="@drawable/ic_album"
             android:title="@string/lbl_sort_album" />
         <item
             android:id="@+id/option_sort_year"
+            android:icon="@drawable/ic_calendar"
             android:title="@string/lbl_sort_year" />
     </group>
     <group android:checkableBehavior="all">

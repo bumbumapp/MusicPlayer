@@ -101,4 +101,5 @@
     <string name="lbl_sleep_cancelled">Minuteur désactivé</string>
     <string name="err_share_song">Impossible de partager ce titre</string>
     <string name="lbl_next_up">À suivre</string>
+    <string name="lbl_sort_desc">Décroissant</string>
 </resources>

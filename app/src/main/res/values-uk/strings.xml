@@ -82,4 +82,5 @@
     <string name="lbl_sleep_cancelled">Таймер сну вимкнено</string>
     <string name="err_share_song">Цим треком не можна поділитися</string>
     <string name="lbl_next_up">Далі</string>
+    <string name="lbl_sort_desc">За спаданням</string>
 </resources>

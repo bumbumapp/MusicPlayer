@@ -21,10 +21,9 @@ package org.bumbumapps.musicplayer.home
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.iterator
+import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -47,6 +46,7 @@ import org.bumbumapps.musicplayer.music.MusicViewModel
 import org.bumbumapps.musicplayer.music.Song
 import org.bumbumapps.musicplayer.playback.PlaybackViewModel
 import org.bumbumapps.musicplayer.ui.DisplayMode
+import org.bumbumapps.musicplayer.ui.MenuSheet
 import org.bumbumapps.musicplayer.util.logD
 import org.bumbumapps.musicplayer.util.logE
 
@@ -67,7 +67,6 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentHomeBinding.inflate(inflater)
-        val sortItem: MenuItem
 
         // --- UI SETUP ---
 
@@ -86,32 +85,11 @@ class HomeFragment : Fragment() {
                         )
                     }
 
-                    R.id.submenu_sorting -> { }
-
-                    R.id.option_sort_asc -> {
-                        item.isChecked = !item.isChecked
-
-                        val new = homeModel.getSortForDisplay(homeModel.curTab.value!!)
-                            .ascending(item.isChecked)
-
-                        homeModel.updateCurrentSort(new)
-                    }
-
-                    // Sorting option was selected, mark it as selected and update the mode
-                    else -> {
-                        item.isChecked = true
-
-                        val new = homeModel.getSortForDisplay(homeModel.curTab.value!!)
-                            .assignId(item.itemId)
-
-                        homeModel.updateCurrentSort(requireNotNull(new))
-                    }
+                    R.id.submenu_sorting -> showSortSheet()
                 }
 
                 true
             }
-
-            sortItem = menu.findItem(R.id.submenu_sorting)
         }
         AdsLoader.displayInterstitial(requireContext())
 
@@ -204,26 +182,7 @@ class HomeFragment : Fragment() {
         homeModel.curTab.observe(viewLifecycleOwner) { t ->
             val tab = requireNotNull(t)
 
-            // Make sure that we update the scrolling view and allowed menu items before whenever
-            // the tab changes.
-            when (tab) {
-                DisplayMode.SHOW_SONGS -> updateSortMenu(sortItem, tab)
-
-                DisplayMode.SHOW_ALBUMS -> updateSortMenu(sortItem, tab) { id ->
-                    id != R.id.option_sort_album
-                }
-
-                // Artists and genres sort by name only; show that choice instead of a lone
-                // "Ascending" checkbox.
-                DisplayMode.SHOW_ARTISTS -> updateSortMenu(sortItem, tab) { id ->
-                    id == R.id.option_sort_asc || id == R.id.option_sort_name
-                }
-
-                DisplayMode.SHOW_GENRES -> updateSortMenu(sortItem, tab) { id ->
-                    id == R.id.option_sort_asc || id == R.id.option_sort_name
-                }
-            }
-
+            // Make sure that we update the scrolling view whenever the tab changes.
             binding.homeAppbar.liftOnScrollTargetViewId = tab.viewId
         }
 
@@ -258,26 +217,35 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    private fun updateSortMenu(
-        item: MenuItem,
-        displayMode: DisplayMode,
-        isVisible: (Int) -> Boolean = { true }
-    ) {
-        val toHighlight = homeModel.getSortForDisplay(displayMode)
-   item.subMenu?.let { subItems->
-       for (option in subItems) {
-           if (option.itemId == toHighlight.itemId) {
-               option.isChecked = true
-           }
+    /**
+     * Show the sort options for the current tab in a [MenuSheet].
+     */
+    private fun showSortSheet() {
+        val tab = homeModel.curTab.value ?: return
+        val sort = homeModel.getSortForDisplay(tab)
 
-           if (option.itemId == R.id.option_sort_asc) {
-               option.isChecked = toHighlight.isAscending
-           }
+        MenuSheet(requireContext()).apply {
+            setHeader(getString(R.string.lbl_sort), null)
 
-           option.isVisible = isVisible(option.itemId)
-       }
+            val options = MenuSheet.inflateMenu(requireContext(), R.menu.menu_detail_sort)
+            options.forEach { option -> option.isVisible = isSortAllowed(tab, option.itemId) }
 
-   }
+            addItems(options, sort.itemId) { option ->
+                val new = homeModel.getSortForDisplay(tab).assignId(option.itemId)
+                homeModel.updateCurrentSort(requireNotNull(new))
+            }
+
+            setDirection(sort.isAscending) { ascending ->
+                homeModel.updateCurrentSort(homeModel.getSortForDisplay(tab).ascending(ascending))
+            }
+        }.show()
+    }
+
+    private fun isSortAllowed(displayMode: DisplayMode, id: Int): Boolean = when (displayMode) {
+        DisplayMode.SHOW_SONGS -> id != R.id.option_sort_asc
+        DisplayMode.SHOW_ALBUMS -> id != R.id.option_sort_asc && id != R.id.option_sort_album
+        // Artists and genres sort by name only.
+        DisplayMode.SHOW_ARTISTS, DisplayMode.SHOW_GENRES -> id == R.id.option_sort_name
     }
 
     private val DisplayMode.viewId: Int get() = when (this) {

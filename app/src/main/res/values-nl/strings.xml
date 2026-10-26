@@ -155,4 +155,5 @@
     <string name="lbl_sleep_cancelled">Slaaptimer uitgezet</string>
     <string name="err_share_song">Dit nummer kan niet worden gedeeld</string>
     <string name="lbl_next_up">Hierna</string>
+    <string name="lbl_sort_desc">Aflopend</string>
 </resources>

@@ -82,6 +82,10 @@ class PlaybackLayout @JvmOverloads constructor(
 
     /** The current panel state. Can be [PanelState.DRAGGING]*/
     private var panelState = INIT_PANEL_STATE
+    private var expandWhenSettled = false
+
+    /** Whether the full playback panel is currently shown. */
+    val isExpanded: Boolean get() = panelState == PanelState.EXPANDED
 
     /** The last panel state before a drag event began. */
     private var lastIdlePanelState = INIT_PANEL_STATE
@@ -216,6 +220,25 @@ class PlaybackLayout @JvmOverloads constructor(
         } else {
             applyState(PanelState.HIDDEN)
         }
+    }
+
+    /**
+     * Expand the panel into the full playback view if a song is shown.
+     * @return If the panel will be expanded or not.
+     */
+    fun expand(): Boolean {
+        if (!isEnabled || panelState == PanelState.EXPANDED) {
+            return false
+        }
+
+        if (panelState == PanelState.HIDDEN || panelState == PanelState.DRAGGING) {
+            // The bar is still sliding in for the very first song. Expand once it has settled.
+            expandWhenSettled = true
+        } else {
+            applyState(PanelState.EXPANDED)
+        }
+
+        return true
     }
 
     /**
@@ -538,6 +561,14 @@ class PlaybackLayout @JvmOverloads constructor(
         }
 
         panelState = state
+
+        if (expandWhenSettled && state != PanelState.DRAGGING) {
+            expandWhenSettled = false
+
+            if (state == PanelState.COLLAPSED) {
+                post { applyState(PanelState.EXPANDED) }
+            }
+        }
 
         sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED)
     }

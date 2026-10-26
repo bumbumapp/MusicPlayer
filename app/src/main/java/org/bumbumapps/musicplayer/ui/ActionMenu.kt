@@ -22,10 +22,12 @@ import android.view.View
 import androidx.annotation.IdRes
 import androidx.annotation.MenuRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import org.bumbumapps.musicplayer.R
+import org.bumbumapps.musicplayer.coil.bindAlbumArt
+import org.bumbumapps.musicplayer.coil.bindArtistImage
+import org.bumbumapps.musicplayer.coil.bindGenreImage
 import org.bumbumapps.musicplayer.detail.DetailViewModel
 import org.bumbumapps.musicplayer.music.Album
 import org.bumbumapps.musicplayer.music.Artist
@@ -48,9 +50,9 @@ fun Fragment.newMenu(anchor: View, data: BaseModel, flag: Int = ActionMenu.FLAG_
 }
 
 /**
- * A wrapper around [PopupMenu] that automates the menu creation for nearly every datatype in Auxio.
+ * A [MenuSheet] that automates the menu creation for nearly every datatype in Auxio.
  * @param activity [AppCompatActivity] required as both a context and ViewModelStore owner.
- * @param anchor [View] This should be centered around
+ * @param anchor [View] the menu was opened from (unused by the sheet, kept for callers)
  * @param data [BaseModel] this menu corresponds to
  * @param flag Any extra flags to accompany the data. See [FLAG_NONE], [FLAG_IN_ALBUM], [FLAG_IN_ARTIST], [FLAG_IN_GENRE] for more details.
  * @throws IllegalStateException When there is no menu for this specific datatype/flag
@@ -58,10 +60,10 @@ fun Fragment.newMenu(anchor: View, data: BaseModel, flag: Int = ActionMenu.FLAG_
  */
 class ActionMenu(
     private val activity: AppCompatActivity,
-    anchor: View,
+    @Suppress("UNUSED_PARAMETER") anchor: View,
     private val data: BaseModel,
     private val flag: Int
-) : PopupMenu(activity, anchor) {
+) : MenuSheet(activity) {
     private val context = activity.applicationContext
 
     // Get viewmodels using the activity as the store owner
@@ -80,10 +82,26 @@ class ActionMenu(
             "There is no menu associated with datatype ${data::class.simpleName} and flag $flag"
         }
 
-        inflate(menuRes)
-        setOnMenuItemClickListener { item ->
+        setupHeader()
+        addItems(inflateMenu(activity, menuRes)) { item ->
             onMenuClick(item.itemId)
-            true
+        }
+    }
+
+    private fun setupHeader() {
+        when (data) {
+            is Song -> setHeader(
+                data.name,
+                activity.getString(R.string.fmt_two, data.album.artist.resolvedName, data.album.name)
+            ) { it.bindAlbumArt(data) }
+
+            is Album -> setHeader(data.name, data.artist.resolvedName) { it.bindAlbumArt(data) }
+
+            is Artist -> setHeader(data.resolvedName, null) { it.bindArtistImage(data) }
+
+            is Genre -> setHeader(data.resolvedName, null) { it.bindGenreImage(data) }
+
+            else -> {}
         }
     }
 

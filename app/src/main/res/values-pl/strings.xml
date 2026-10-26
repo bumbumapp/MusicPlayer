@@ -100,4 +100,5 @@
     <string name="lbl_sleep_cancelled">Wyłącznik czasowy wyłączony</string>
     <string name="err_share_song">Nie można udostępnić tego utworu</string>
     <string name="lbl_next_up">Następne</string>
+    <string name="lbl_sort_desc">Malejąco</string>
 </resources>

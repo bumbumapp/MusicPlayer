@@ -62,6 +62,7 @@ class PlaybackViewModel : ViewModel(), PlaybackStateManager.Callback {
 
     // Other
     private var mIntentUri: Uri? = null
+    private val mOpenPlayback = MutableLiveData(false)
 
     /** The current song. */
     val song: LiveData<Song?> get() = mSong
@@ -79,6 +80,8 @@ class PlaybackViewModel : ViewModel(), PlaybackStateManager.Callback {
     val nextUp: LiveData<List<Song>> get() = mNextUp
     /** The current [PlaybackMode] that also determines the queue */
     val playbackMode: LiveData<PlaybackMode> get() = mMode
+    /** True when the UI should expand the full playback panel, e.g. after a song was tapped. */
+    val openPlayback: LiveData<Boolean> get() = mOpenPlayback
 
     private val playbackManager = PlaybackStateManager.maybeGetInstance()
     private val settingsManager = SettingsManager.getInstance()
@@ -103,6 +106,13 @@ class PlaybackViewModel : ViewModel(), PlaybackStateManager.Callback {
      */
     fun playSong(song: Song, mode: PlaybackMode = settingsManager.songPlaybackMode) {
         playbackManager.playSong(song, mode)
+        // Tapping a song should take the user straight to Now Playing.
+        mOpenPlayback.postValue(true)
+    }
+
+    /** Mark the [openPlayback] request as handled. */
+    fun finishOpenPlayback() {
+        mOpenPlayback.value = false
     }
 
     /**

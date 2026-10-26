@@ -22,7 +22,6 @@ import android.graphics.RenderEffect
 import android.graphics.Shader
 import android.os.Build
 import android.widget.Toast
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.bumbumapps.musicplayer.util.shareSong
 import org.bumbumapps.musicplayer.util.showToast
 import android.os.Bundle
@@ -41,6 +40,7 @@ import org.bumbumapps.musicplayer.databinding.FragmentPlaybackBinding
 import org.bumbumapps.musicplayer.detail.DetailViewModel
 import org.bumbumapps.musicplayer.playback.state.LoopMode
 import org.bumbumapps.musicplayer.settings.SettingsManager
+import org.bumbumapps.musicplayer.ui.MenuSheet
 import org.bumbumapps.musicplayer.ui.memberBinding
 import org.bumbumapps.musicplayer.util.logD
 import org.bumbumapps.musicplayer.util.systemBarsCompat
@@ -199,32 +199,36 @@ class PlaybackFragment : Fragment() {
     private fun showSleepTimerDialog() {
         val ctx = requireContext()
         val minutes = SleepTimer.OPTIONS_MINUTES
-        val labels = minutes.map { ctx.getString(R.string.fmt_sleep_minutes, it) }.toMutableList()
-        if (SleepTimer.isActive) {
-            labels.add(0, ctx.getString(R.string.lbl_sleep_timer_off))
-        }
         val title = if (SleepTimer.isActive) {
             ctx.getString(R.string.fmt_sleep_remaining, SleepTimer.format(SleepTimer.remainingMs()))
         } else {
             ctx.getString(R.string.lbl_sleep_timer)
         }
 
-        MaterialAlertDialogBuilder(ctx)
-            .setTitle(title)
-            .setItems(labels.toTypedArray()) { _, which ->
-                val index = if (SleepTimer.isActive) which - 1 else which
-                if (index < 0) {
+        val options = MenuSheet.emptyMenu(ctx)
+        if (SleepTimer.isActive) {
+            options.add(0, SLEEP_OFF_ID, 0, R.string.lbl_sleep_timer_off).setIcon(R.drawable.ic_close)
+        }
+        minutes.forEachIndexed { i, min ->
+            options.add(0, i, i + 1, ctx.getString(R.string.fmt_sleep_minutes, min))
+                .setIcon(R.drawable.ic_timer)
+        }
+
+        MenuSheet(ctx).apply {
+            setHeader(title, null)
+            addItems(options) { item ->
+                if (item.itemId == SLEEP_OFF_ID) {
                     SleepTimer.cancel()
                     ctx.showToast(R.string.lbl_sleep_cancelled)
                 } else {
-                    SleepTimer.start(minutes[index])
+                    val min = minutes[item.itemId]
+                    SleepTimer.start(min)
                     Toast.makeText(
-                        ctx, ctx.getString(R.string.fmt_sleep_set, minutes[index]), Toast.LENGTH_SHORT
+                        ctx, ctx.getString(R.string.fmt_sleep_set, min), Toast.LENGTH_SHORT
                     ).show()
                 }
             }
-            .setNegativeButton(android.R.string.cancel, null)
-            .show()
+        }.show()
     }
 
     private fun navigateUp() {
@@ -233,6 +237,7 @@ class PlaybackFragment : Fragment() {
         (requireView().parent.parent.parent as PlaybackLayout).collapse()
     }
 
-
-
+    companion object {
+        private const val SLEEP_OFF_ID = 1000
+    }
 }

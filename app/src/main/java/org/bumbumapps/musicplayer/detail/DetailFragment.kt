@@ -19,7 +19,6 @@
 package org.bumbumapps.musicplayer.detail
 
 import androidx.annotation.MenuRes
-import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -29,6 +28,8 @@ import org.bumbumapps.musicplayer.R
 import org.bumbumapps.musicplayer.databinding.FragmentDetailBinding
 import org.bumbumapps.musicplayer.music.MusicParent
 import org.bumbumapps.musicplayer.playback.PlaybackViewModel
+import org.bumbumapps.musicplayer.ui.MenuSheet
+import org.bumbumapps.musicplayer.ui.Sort
 import org.bumbumapps.musicplayer.ui.memberBinding
 import org.bumbumapps.musicplayer.util.applySpans
 
@@ -100,38 +101,36 @@ abstract class DetailFragment : Fragment() {
     }
 
     /**
-     * Shortcut method for spinning up the sorting [PopupMenu]
+     * Shortcut method for spinning up the sorting [MenuSheet]
      * @param config The initial configuration to apply to the menu. This is provided by [DetailViewModel.showMenu].
      * @param showItem Which menu items to keep
      */
     protected fun showMenu(config: DetailViewModel.MenuConfig, showItem: ((Int) -> Boolean)? = null) {
-        PopupMenu(config.anchor.context, config.anchor).apply {
-            inflate(R.menu.menu_detail_sort)
+        MenuSheet(config.anchor.context).apply {
+            setHeader(getString(R.string.lbl_sort), null)
 
-            setOnMenuItemClickListener { item ->
-                if (item.itemId == R.id.option_sort_asc) {
-                    item.isChecked = !item.isChecked
-                    detailModel.finishShowMenu(config.sortMode.ascending(item.isChecked))
-                } else {
-                    item.isChecked = true
-                    detailModel.finishShowMenu(config.sortMode.assignId(item.itemId))
+            val options = MenuSheet.inflateMenu(context, R.menu.menu_detail_sort)
+            options.forEach { item ->
+                item.isVisible = item.itemId != R.id.option_sort_asc &&
+                    (showItem == null || showItem(item.itemId))
+            }
+
+            var newMode: Sort? = null
+
+            addItems(options, config.sortMode.itemId) { item ->
+                newMode = (newMode ?: config.sortMode).assignId(item.itemId)
+            }
+
+            // The ascending toggle stays when the sort direction is supported at all.
+            if (showItem == null || showItem(R.id.option_sort_asc)) {
+                setDirection(config.sortMode.isAscending) { ascending ->
+                    newMode = (newMode ?: config.sortMode).ascending(ascending)
                 }
-
-                true
             }
 
             setOnDismissListener {
-                detailModel.finishShowMenu(null)
+                detailModel.finishShowMenu(newMode)
             }
-
-            if (showItem != null) {
-                menu.forEach { item ->
-                    item.isVisible = showItem(item.itemId)
-                }
-            }
-
-            menu.findItem(config.sortMode.itemId).isChecked = true
-            menu.findItem(R.id.option_sort_asc).isChecked = config.sortMode.isAscending
 
             show()
         }

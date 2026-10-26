@@ -3,16 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_play"
+        android:icon="@drawable/ic_play"
         android:title="@string/lbl_play"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_shuffle"
+        android:icon="@drawable/ic_shuffle"
         android:title="@string/lbl_shuffle"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_play_next"
+        android:icon="@drawable/ic_play_next"
         android:title="@string/lbl_play_next" />
     <item
         android:id="@+id/action_queue_add"
+        android:icon="@drawable/ic_queue_add"
         android:title="@string/lbl_queue_add" />
 </menu>

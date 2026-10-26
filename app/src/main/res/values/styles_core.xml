@@ -28,6 +28,11 @@
 
         <!-- Material configuration -->
         <item name="materialAlertDialogTheme">@style/Theme.Auxio.Dialog</item>
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.Material3.BottomSheetDialog</item>
+        <item name="popupMenuStyle">@style/Widget.Auxio.PopupMenu</item>
+        <item name="android:popupMenuStyle">@style/Widget.Auxio.PopupMenu</item>
+        <item name="actionOverflowMenuStyle">@style/Widget.Auxio.PopupMenu.Overflow</item>
+        <item name="android:actionOverflowMenuStyle">@style/Widget.Auxio.PopupMenu.Overflow</item>
 
         <item name="textAppearanceDisplayLarge">@style/TextAppearance.Auxio.DisplayLarge</item>
         <item name="textAppearanceDisplayMedium">@style/TextAppearance.Auxio.DisplayMedium</item>

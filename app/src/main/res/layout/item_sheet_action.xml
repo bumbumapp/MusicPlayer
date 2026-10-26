@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:background="@drawable/ui_sheet_row"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/spacing_medium"
+    android:paddingEnd="@dimen/spacing_medium">
+
+    <ImageView
+        android:id="@+id/sheet_action_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ui_sheet_icon_bg"
+        android:importantForAccessibility="no"
+        android:padding="9dp"
+        android:tint="?attr/colorPrimary"
+        tools:src="@drawable/ic_play_next" />
+
+    <TextView
+        android:id="@+id/sheet_action_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_medium"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAppearance="@style/TextAppearance.Auxio.TitleMedium"
+        android:textColor="?attr/colorOnSurface"
+        tools:text="Play next" />
+
+    <ImageView
+        android:id="@+id/sheet_action_check"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/ic_check"
+        android:tint="?attr/colorPrimary"
+        android:visibility="gone"
+        tools:visibility="visible" />
+</LinearLayout>

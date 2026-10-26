@@ -209,4 +209,27 @@
         <item name="iconTint">?attr/colorPrimary</item>
         <item name="iconGravity">textStart</item>
     </style>
+    <!-- Segmented button used by the sort sheet -->
+    <style name="Widget.Auxio.Button.Segment" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:minHeight">48dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconSize">18dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.Auxio.LabelLarge</item>
+        <item name="backgroundTint">@color/sel_segment_bg</item>
+        <item name="android:textColor">@color/sel_segment_fg</item>
+        <item name="iconTint">@color/sel_segment_fg</item>
+        <item name="strokeColor">?attr/colorOutlineVariant</item>
+    </style>
+
+    <!-- Rounded popup menus -->
+    <style name="Widget.Auxio.PopupMenu" parent="Widget.Material3.PopupMenu">
+        <item name="android:popupBackground">@drawable/ui_popup_bg</item>
+        <item name="android:popupElevation">8dp</item>
+    </style>
+
+    <style name="Widget.Auxio.PopupMenu.Overflow" parent="Widget.Material3.PopupMenu.Overflow">
+        <item name="android:popupBackground">@drawable/ui_popup_bg</item>
+        <item name="android:popupElevation">8dp</item>
+    </style>
+
 </resources>

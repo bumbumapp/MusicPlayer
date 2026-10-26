@@ -181,4 +181,5 @@
     <string name="lbl_sleep_cancelled">Sleep timer turned off</string>
     <string name="err_share_song">This song can\'t be shared</string>
     <string name="lbl_next_up">Next up</string>
+    <string name="lbl_sort_desc">Descending</string>
 </resources>

@@ -154,4 +154,5 @@
     <string name="lbl_sleep_cancelled">Časovač vypnut</string>
     <string name="err_share_song">Tuto skladbu nelze sdílet</string>
     <string name="lbl_next_up">Další v pořadí</string>
+    <string name="lbl_sort_desc">Sestupně</string>
 </resources>

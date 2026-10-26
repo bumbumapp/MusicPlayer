@@ -97,6 +97,14 @@ class MainFragment : Fragment() {
         // would result in annoying UI issues.
         binding.playbackLayout.setup(playbackModel, detailModel, viewLifecycleOwner)
 
+        playbackModel.openPlayback.observe(viewLifecycleOwner) { open ->
+            if (open) {
+                // Wait a frame so the bar has been shown for the new song first.
+                binding.playbackLayout.post { binding.playbackLayout.expand() }
+                playbackModel.finishOpenPlayback()
+            }
+        }
+
         // Initialize music loading. Do it here so that it shows on every fragment that this
         // one contains.
         musicModel.loadMusic(requireContext())

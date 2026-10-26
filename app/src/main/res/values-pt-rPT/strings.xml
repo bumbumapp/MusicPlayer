@@ -99,4 +99,5 @@
     <string name="lbl_sleep_cancelled">Temporizador desligado</string>
     <string name="err_share_song">Não é possível partilhar esta música</string>
     <string name="lbl_next_up">A seguir</string>
+    <string name="lbl_sort_desc">Descendente</string>
 </resources>

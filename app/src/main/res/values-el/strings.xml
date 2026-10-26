@@ -92,4 +92,5 @@
     <string name="lbl_sleep_cancelled">Ο χρονοδιακόπτης απενεργοποιήθηκε</string>
     <string name="err_share_song">Δεν είναι δυνατή η κοινοποίηση</string>
     <string name="lbl_next_up">Επόμενα</string>
+    <string name="lbl_sort_desc">Φθίνουσα</string>
 </resources>

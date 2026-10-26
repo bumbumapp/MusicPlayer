@@ -29,7 +29,8 @@
     <dimen name="popup_min_width">78dp</dimen>
     <dimen name="popup_padding_end">28dp</dimen>
 
-    <dimen name="slider_thumb_radius">6dp</dimen>
+    <dimen name="slider_thumb_radius">8dp</dimen>
+    <dimen name="slider_thumb_size">16dp</dimen>
     <dimen name="slider_halo_radius">12dp</dimen>
 
     <dimen name="recycler_fab_space_normal">88dp</dimen>

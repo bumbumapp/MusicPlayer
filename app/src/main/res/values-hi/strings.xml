@@ -74,4 +74,5 @@
     <string name="lbl_sleep_cancelled">स्लीप टाइमर बंद किया गया</string>
     <string name="err_share_song">यह गाना शेयर नहीं किया जा सकता</string>
     <string name="lbl_next_up">आगे</string>
+    <string name="lbl_sort_desc">घटते क्रम में</string>
 </resources>

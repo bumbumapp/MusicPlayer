@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Beamed eighth notes, kept inside the 66dp adaptive-icon safe zone. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M44.5,42.6 L69.5,36.4 Q72,35.8 72,38.4 L72,64.5 A8.2,7 -20 1,1 66.5,58 L66.5,45.2 L50,49.3 L50,69.5 A8.2,7 -20 1,1 44.5,63 L44.5,45 Q44.5,43.1 44.5,42.6 Z" />
+</vector>

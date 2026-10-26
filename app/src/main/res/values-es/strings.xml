@@ -158,4 +158,5 @@
     <string name="lbl_sleep_cancelled">Temporizador desactivado</string>
     <string name="err_share_song">No se puede compartir esta canción</string>
     <string name="lbl_next_up">A continuación</string>
+    <string name="lbl_sort_desc">Descendente</string>
 </resources>

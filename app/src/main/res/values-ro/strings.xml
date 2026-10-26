@@ -98,4 +98,5 @@
     <string name="lbl_sleep_cancelled">Temporizator oprit</string>
     <string name="err_share_song">Această melodie nu poate fi distribuită</string>
     <string name="lbl_next_up">Urmează</string>
+    <string name="lbl_sort_desc">Descendent</string>
 </resources>

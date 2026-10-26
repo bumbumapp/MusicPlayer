@@ -82,4 +82,5 @@
     <string name="lbl_sleep_cancelled">취침 타이머를 껐습니다</string>
     <string name="err_share_song">이 노래는 공유할 수 없습니다</string>
     <string name="lbl_next_up">다음 곡</string>
+    <string name="lbl_sort_desc">내림차순</string>
 </resources>

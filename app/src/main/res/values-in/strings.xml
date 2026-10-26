@@ -81,4 +81,5 @@
     <string name="lbl_sleep_cancelled">Timer tidur dimatikan</string>
     <string name="err_share_song">Lagu ini tidak dapat dibagikan</string>
     <string name="lbl_next_up">Berikutnya</string>
+    <string name="lbl_sort_desc">Menurun</string>
 </resources>

@@ -80,4 +80,5 @@
     <string name="lbl_sleep_cancelled">已關閉睡眠定時</string>
     <string name="err_share_song">無法分享這首歌曲</string>
     <string name="lbl_next_up">接下來播放</string>
+    <string name="lbl_sort_desc">降序</string>
 </resources>

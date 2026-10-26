@@ -99,4 +99,5 @@
     <string name="lbl_sleep_cancelled">Időzítő kikapcsolva</string>
     <string name="err_share_song">Ez a dal nem osztható meg</string>
     <string name="lbl_next_up">Következik</string>
+    <string name="lbl_sort_desc">Csökkenő</string>
 </resources>

@@ -182,4 +182,5 @@
     <string name="lbl_sleep_cancelled">Таймер сна выключен</string>
     <string name="err_share_song">Этим треком нельзя поделиться</string>
     <string name="lbl_next_up">Далее</string>
+    <string name="lbl_sort_desc">По убыванию</string>
 </resources>
