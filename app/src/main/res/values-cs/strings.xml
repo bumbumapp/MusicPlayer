@@ -155,4 +155,9 @@
     <string name="err_share_song">Tuto skladbu nelze sdílet</string>
     <string name="lbl_next_up">Další v pořadí</string>
     <string name="lbl_sort_desc">Sestupně</string>
+    <string name="lbl_home_title">Tvoje hudba</string>
+    <string name="lbl_shuffle_all">Zamíchat vše</string>
+    <string name="lbl_greeting_morning">Dobré ráno</string>
+    <string name="lbl_greeting_afternoon">Dobré odpoledne</string>
+    <string name="lbl_greeting_evening">Dobrý večer</string>
 </resources>

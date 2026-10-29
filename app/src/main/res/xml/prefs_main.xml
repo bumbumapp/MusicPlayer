@@ -6,7 +6,7 @@
 
 
         <org.bumbumapps.musicplayer.settings.pref.IntListPreference
-            app:defaultValue="@integer/theme_dark"
+            app:defaultValue="@integer/theme_auto"
             app:entries="@array/entires_theme"
             app:entryValues="@array/values_theme"
             app:icon="@drawable/ic_night"

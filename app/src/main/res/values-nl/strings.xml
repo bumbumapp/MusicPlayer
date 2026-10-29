@@ -156,4 +156,9 @@
     <string name="err_share_song">Dit nummer kan niet worden gedeeld</string>
     <string name="lbl_next_up">Hierna</string>
     <string name="lbl_sort_desc">Aflopend</string>
+    <string name="lbl_home_title">Jouw muziek</string>
+    <string name="lbl_shuffle_all">Alles shuffelen</string>
+    <string name="lbl_greeting_morning">Goedemorgen</string>
+    <string name="lbl_greeting_afternoon">Goedemiddag</string>
+    <string name="lbl_greeting_evening">Goedenavond</string>
 </resources>

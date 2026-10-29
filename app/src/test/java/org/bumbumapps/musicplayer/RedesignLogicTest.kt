@@ -25,9 +25,19 @@ class RedesignLogicTest {
     }
 
     @Test
-    fun darkIsTheDefaultThemeMode() {
+    fun bentoFollowsTheSystemThemeByDefault() {
         val compat = File("src/main/java/org/bumbumapps/musicplayer/settings/SettingsCompat.kt").readText()
-        assertTrue(compat.contains("prefs.getInt(SettingsManager.KEY_THEME, AppCompatDelegate.MODE_NIGHT_YES)"))
+        assertTrue(compat.contains("prefs.getInt(SettingsManager.KEY_THEME, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)"))
+        val prefs = File("src/main/res/xml/prefs_main.xml").readText()
+        assertTrue(prefs.contains("app:defaultValue=\"@integer/theme_auto\""))
+    }
+
+    @Test
+    fun homeHasBentoHeaderAndShuffleHeroInsteadOfFab() {
+        val home = File("src/main/res/layout/fragment_home.xml").readText()
+        assertTrue(home.contains("@+id/home_hero"))
+        assertTrue(home.contains("@string/lbl_home_title"))
+        assertFalse(home.contains("MaterialToolbar"))
     }
 
     @Test

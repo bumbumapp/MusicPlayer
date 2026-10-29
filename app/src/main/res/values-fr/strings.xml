@@ -102,4 +102,9 @@
     <string name="err_share_song">Impossible de partager ce titre</string>
     <string name="lbl_next_up">À suivre</string>
     <string name="lbl_sort_desc">Décroissant</string>
+    <string name="lbl_home_title">Ta musique</string>
+    <string name="lbl_shuffle_all">Tout en aléatoire</string>
+    <string name="lbl_greeting_morning">Bonjour</string>
+    <string name="lbl_greeting_afternoon">Bon après-midi</string>
+    <string name="lbl_greeting_evening">Bonsoir</string>
 </resources>

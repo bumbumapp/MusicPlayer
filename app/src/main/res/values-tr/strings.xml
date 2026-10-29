@@ -82,4 +82,9 @@
     <string name="err_share_song">Bu şarkı paylaşılamıyor</string>
     <string name="lbl_next_up">Sıradakiler</string>
     <string name="lbl_sort_desc">Azalan</string>
+    <string name="lbl_home_title">Müziğin</string>
+    <string name="lbl_shuffle_all">Tümünü karıştır</string>
+    <string name="lbl_greeting_morning">Günaydın</string>
+    <string name="lbl_greeting_afternoon">İyi günler</string>
+    <string name="lbl_greeting_evening">İyi akşamlar</string>
 </resources>

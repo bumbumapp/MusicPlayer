@@ -232,4 +232,14 @@
         <item name="android:popupElevation">8dp</item>
     </style>
 
+    <!-- Bento square icon button (44dp, 14dp corners, white tile). -->
+    <style name="Widget.Auxio.SquareAction" parent="">
+        <item name="android:layout_width">44dp</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:background">@drawable/bg_square_action</item>
+        <item name="android:padding">11dp</item>
+        <item name="android:scaleType">centerInside</item>
+        <item name="tint">?attr/colorOnSurface</item>
+    </style>
+
 </resources>

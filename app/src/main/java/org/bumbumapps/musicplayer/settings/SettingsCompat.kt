@@ -53,7 +53,7 @@ fun handleThemeCompat(prefs: SharedPreferences): Int {
         return newValue
     }
 
-    return prefs.getInt(SettingsManager.KEY_THEME, AppCompatDelegate.MODE_NIGHT_YES)
+    return prefs.getInt(SettingsManager.KEY_THEME, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
 }
 
 fun handleAccentCompat(prefs: SharedPreferences): Accent {

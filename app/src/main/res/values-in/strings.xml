@@ -82,4 +82,9 @@
     <string name="err_share_song">Lagu ini tidak dapat dibagikan</string>
     <string name="lbl_next_up">Berikutnya</string>
     <string name="lbl_sort_desc">Menurun</string>
+    <string name="lbl_home_title">Musikmu</string>
+    <string name="lbl_shuffle_all">Acak semua</string>
+    <string name="lbl_greeting_morning">Selamat pagi</string>
+    <string name="lbl_greeting_afternoon">Selamat siang</string>
+    <string name="lbl_greeting_evening">Selamat malam</string>
 </resources>

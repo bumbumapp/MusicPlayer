@@ -93,4 +93,9 @@
     <string name="err_share_song">Δεν είναι δυνατή η κοινοποίηση</string>
     <string name="lbl_next_up">Επόμενα</string>
     <string name="lbl_sort_desc">Φθίνουσα</string>
+    <string name="lbl_home_title">Η μουσική σου</string>
+    <string name="lbl_shuffle_all">Τυχαία όλα</string>
+    <string name="lbl_greeting_morning">Καλημέρα</string>
+    <string name="lbl_greeting_afternoon">Καλό απόγευμα</string>
+    <string name="lbl_greeting_evening">Καλησπέρα</string>
 </resources>

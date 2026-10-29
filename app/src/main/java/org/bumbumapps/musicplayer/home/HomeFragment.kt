@@ -72,24 +72,21 @@ class HomeFragment : Fragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
 
-        binding.homeToolbar.apply {
-            setOnMenuItemClickListener { item ->
-                when (item.itemId) {
-                    R.id.action_search -> {
-                        findNavController().navigate(HomeFragmentDirections.actionShowSearch())
-                    }
-
-                    R.id.action_settings -> {
-                        parentFragment?.parentFragment?.findNavController()?.navigate(
-                            MainFragmentDirections.actionShowSettings1()
-                        )
-                    }
-
-                    R.id.submenu_sorting -> showSortSheet()
-                }
-
-                true
+        binding.homeGreeting.setText(
+            when (java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY)) {
+                in 5..11 -> R.string.lbl_greeting_morning
+                in 12..17 -> R.string.lbl_greeting_afternoon
+                else -> R.string.lbl_greeting_evening
             }
+        )
+        binding.homeSearch.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionShowSearch())
+        }
+        binding.homeSort.setOnClickListener { showSortSheet() }
+        binding.homeSettings.setOnClickListener {
+            parentFragment?.parentFragment?.findNavController()?.navigate(
+                MainFragmentDirections.actionShowSettings1()
+            )
         }
         AdsLoader.displayInterstitial(requireContext())
 
@@ -132,10 +129,8 @@ class HomeFragment : Fragment() {
             ).attach()
         }
 
-        binding.homeFab.setOnClickListener {
-            AdsLoader.showAds(requireContext()){playbackModel.shuffleAll()};
-
-
+        binding.homeHero.setOnClickListener {
+            AdsLoader.showAds(requireContext()) { playbackModel.shuffleAll() }
         }
 
         // --- VIEWMODEL SETUP ---
@@ -146,26 +141,16 @@ class HomeFragment : Fragment() {
         musicModel.loaderResponse.observe(viewLifecycleOwner) { response ->
             // Handle the loader response.
             when (response) {
-                is MusicStore.Response.Ok -> binding.homeFab.show()
+                is MusicStore.Response.Ok -> {
+                    val count = MusicStore.maybeGetInstance()?.songs?.size ?: 0
+                    binding.homeHeroCount.text =
+                        resources.getQuantityString(R.plurals.fmt_song_count, count, count)
+                    binding.homeHero.visibility = View.VISIBLE
+                }
 
-                // While loading or during an error, make sure we keep the shuffle fab hidden so
-                // that any kind of loading is impossible. PlaybackStateManager also relies on this
-                // invariant, so please don't change it.
-                else -> binding.homeFab.hide()
-            }
-        }
-
-        homeModel.fastScrolling.observe(viewLifecycleOwner) { scrolling ->
-            // Make sure an update here doesn't mess up the FAB state when it comes to the
-            // loader response.
-            if (musicModel.loaderResponse.value !is MusicStore.Response.Ok) {
-                return@observe
-            }
-
-            if (scrolling) {
-                binding.homeFab.hide()
-            } else {
-                binding.homeFab.show()
+                // While loading or during an error, keep shuffle hidden so that no playback can
+                // start before the library exists. PlaybackStateManager relies on this invariant.
+                else -> binding.homeHero.visibility = View.INVISIBLE
             }
         }
 
@@ -184,6 +169,7 @@ class HomeFragment : Fragment() {
 
             // Make sure that we update the scrolling view whenever the tab changes.
             binding.homeAppbar.liftOnScrollTargetViewId = tab.viewId
+            binding.homeAppbar.setExpanded(true, false)
         }
 
         detailModel.navToItem.observe(viewLifecycleOwner) { item ->

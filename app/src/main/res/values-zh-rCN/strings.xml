@@ -72,4 +72,9 @@
     <string name="err_share_song">无法分享这首歌曲</string>
     <string name="lbl_next_up">接下来播放</string>
     <string name="lbl_sort_desc">降序</string>
+    <string name="lbl_home_title">我的音乐</string>
+    <string name="lbl_shuffle_all">全部随机播放</string>
+    <string name="lbl_greeting_morning">早上好</string>
+    <string name="lbl_greeting_afternoon">下午好</string>
+    <string name="lbl_greeting_evening">晚上好</string>
 </resources>

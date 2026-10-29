@@ -83,4 +83,9 @@
     <string name="err_share_song">이 노래는 공유할 수 없습니다</string>
     <string name="lbl_next_up">다음 곡</string>
     <string name="lbl_sort_desc">내림차순</string>
+    <string name="lbl_home_title">내 음악</string>
+    <string name="lbl_shuffle_all">전체 셔플</string>
+    <string name="lbl_greeting_morning">좋은 아침이에요</string>
+    <string name="lbl_greeting_afternoon">좋은 오후예요</string>
+    <string name="lbl_greeting_evening">좋은 저녁이에요</string>
 </resources>

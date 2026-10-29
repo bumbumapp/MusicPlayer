@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Bento primary action: solid accent squircle. -->
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="?attr/colorControlHighlight">
     <item>
-        <shape android:shape="oval">
-            <gradient
-                android:angle="315"
-                android:endColor="@color/aurora_grad_end"
-                android:startColor="@color/aurora_grad_start" />
+        <shape android:shape="rectangle">
+            <corners android:radius="28dp" />
+            <solid android:color="?attr/colorPrimary" />
         </shape>
     </item>
 </ripple>

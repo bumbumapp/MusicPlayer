@@ -387,10 +387,10 @@
     <color name="grey_on_surface_inverse">#191919</color>
 
     <!-- Aurora: the default bumbumapp Music Player palette -->
-    <color name="aurora_primary">#C4A6FF</color>
-    <color name="aurora_on_primary">#2F0F73</color>
-    <color name="aurora_primary_container">#4A2A9E</color>
-    <color name="aurora_on_primary_container">#E9DDFF</color>
+    <color name="aurora_primary">#7B5CFF</color>
+    <color name="aurora_on_primary">#FFFFFF</color>
+    <color name="aurora_primary_container">#2E2470</color>
+    <color name="aurora_on_primary_container">#E8E2FF</color>
     <color name="aurora_primary_inverse">#6B3FE0</color>
     <color name="aurora_secondary">#FF7AB6</color>
     <color name="aurora_on_secondary">#5C0030</color>
@@ -404,23 +404,23 @@
     <color name="aurora_on_error">#680003</color>
     <color name="aurora_error_container">#930006</color>
     <color name="aurora_on_error_container">#FFDAD4</color>
-    <color name="aurora_surface">#0F0C17</color>
-    <color name="aurora_on_surface">#ECE6F3</color>
-    <color name="aurora_surface_variant">#2A2438</color>
-    <color name="aurora_on_surface_variant">#CBC3DA</color>
+    <color name="aurora_surface">#0D0F16</color>
+    <color name="aurora_on_surface">#F2F4F8</color>
+    <color name="aurora_surface_variant">#232735</color>
+    <color name="aurora_on_surface_variant">#A4AABA</color>
     <color name="aurora_surface_inverse">#ECE6F3</color>
     <color name="aurora_on_surface_inverse">#312D3A</color>
-    <color name="aurora_card">#1A1625</color>
-    <color name="aurora_card_stroke">#26FFFFFF</color>
-    <color name="aurora_scrim">#660F0C17</color>
-    <color name="aurora_scrim_mid">#B30F0C17</color>
-    <color name="aurora_scrim_end">#FF0F0C17</color>
-    <color name="aurora_surface_container_lowest">#0A0811</color>
-    <color name="aurora_surface_container_low">#15111F</color>
-    <color name="aurora_surface_container_high">#231E30</color>
-    <color name="aurora_surface_container_highest">#2C263A</color>
-    <color name="aurora_surface_container">#1A1625</color>
-    <color name="aurora_outline">#948DA3</color>
-    <color name="aurora_outline_variant">#2F2940</color>
+    <color name="aurora_card">#171A23</color>
+    <color name="aurora_card_stroke">#00000000</color>
+    <color name="aurora_scrim">#660D0F16</color>
+    <color name="aurora_scrim_mid">#B30D0F16</color>
+    <color name="aurora_scrim_end">#FF0D0F16</color>
+    <color name="aurora_surface_container_lowest">#0A0C12</color>
+    <color name="aurora_surface_container_low">#141720</color>
+    <color name="aurora_surface_container_high">#1E2230</color>
+    <color name="aurora_surface_container_highest">#262B3A</color>
+    <color name="aurora_surface_container">#171A23</color>
+    <color name="aurora_outline">#7D8396</color>
+    <color name="aurora_outline_variant">#262B3A</color>
     <color name="aurora_track_inactive">#33FFFFFF</color>
 </resources>

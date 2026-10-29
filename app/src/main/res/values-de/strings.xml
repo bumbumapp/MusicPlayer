@@ -177,4 +177,9 @@
     <string name="err_share_song">Dieser Titel kann nicht geteilt werden</string>
     <string name="lbl_next_up">Als Nächstes</string>
     <string name="lbl_sort_desc">Absteigend</string>
+    <string name="lbl_home_title">Deine Musik</string>
+    <string name="lbl_shuffle_all">Alles zufällig</string>
+    <string name="lbl_greeting_morning">Guten Morgen</string>
+    <string name="lbl_greeting_afternoon">Guten Tag</string>
+    <string name="lbl_greeting_evening">Guten Abend</string>
 </resources>

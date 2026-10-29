@@ -55,7 +55,7 @@ class AlbumListFragment : HomeListFragment() {
             ::newMenu
         )
 
-        setupRecycler(R.id.home_album_list, adapter, homeModel.albums)
+        setupRecycler(R.id.home_album_list, adapter, homeModel.albums, grouped = false)
 
         // Albums are a cover grid: two columns on phones, more on wider screens.
         binding.homeRecycler.apply {

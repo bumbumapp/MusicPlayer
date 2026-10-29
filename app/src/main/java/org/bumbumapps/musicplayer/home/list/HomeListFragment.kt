@@ -29,6 +29,7 @@ import org.bumbumapps.musicplayer.home.HomeViewModel
 import org.bumbumapps.musicplayer.music.BaseModel
 import org.bumbumapps.musicplayer.playback.PlaybackViewModel
 import org.bumbumapps.musicplayer.ui.memberBinding
+import org.bumbumapps.musicplayer.ui.GroupedCardDecoration
 import org.bumbumapps.musicplayer.util.applySpans
 
 /**
@@ -52,12 +53,14 @@ abstract class HomeListFragment : Fragment() {
         @IdRes uniqueId: Int,
         homeAdapter: HomeAdapter<T, VH>,
         homeData: LiveData<List<T>>,
+        grouped: Boolean = true,
     ) {
         binding.homeRecycler.apply {
             id = uniqueId
             adapter = homeAdapter
             setHasFixedSize(true)
             applySpans()
+            if (grouped) addItemDecoration(GroupedCardDecoration(context))
 
             popupProvider = listPopupProvider
             onDragListener = { dragging ->

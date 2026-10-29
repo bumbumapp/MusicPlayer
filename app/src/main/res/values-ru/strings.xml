@@ -183,4 +183,9 @@
     <string name="err_share_song">Этим треком нельзя поделиться</string>
     <string name="lbl_next_up">Далее</string>
     <string name="lbl_sort_desc">По убыванию</string>
+    <string name="lbl_home_title">Ваша музыка</string>
+    <string name="lbl_shuffle_all">Перемешать всё</string>
+    <string name="lbl_greeting_morning">Доброе утро</string>
+    <string name="lbl_greeting_afternoon">Добрый день</string>
+    <string name="lbl_greeting_evening">Добрый вечер</string>
 </resources>

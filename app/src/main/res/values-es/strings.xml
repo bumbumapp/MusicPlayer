@@ -159,4 +159,9 @@
     <string name="err_share_song">No se puede compartir esta canción</string>
     <string name="lbl_next_up">A continuación</string>
     <string name="lbl_sort_desc">Descendente</string>
+    <string name="lbl_home_title">Tu música</string>
+    <string name="lbl_shuffle_all">Aleatorio</string>
+    <string name="lbl_greeting_morning">Buenos días</string>
+    <string name="lbl_greeting_afternoon">Buenas tardes</string>
+    <string name="lbl_greeting_evening">Buenas noches</string>
 </resources>

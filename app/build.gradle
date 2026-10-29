@@ -13,8 +13,8 @@ android {
 
     defaultConfig {
         applicationId "org.bumbumapps.musicplayer"
-        versionName "2.4.1"
-        versionCode 13
+        versionName "2.5.0"
+        versionCode 14
 
         minSdk 24 // play-services-ads 25 requires 24
         targetSdk 36
