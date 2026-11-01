@@ -14,7 +14,7 @@ def hmsAdsPropsFile = rootProject.file('ads.properties')
 if (hmsAdsPropsFile.exists()) hmsAdsPropsFile.withInputStream { hmsAdsProps.load(it) }
 def hmsAdId = { String key, String fallback -> ((project.findProperty(key) ?: hmsAdsProps.getProperty(key)) ?: fallback).toString() }
 def HMS_TEST_INTERSTITIAL_ID = 'testb4znbuh3n2'
-def HMS_INTERSTITIAL_ID = hmsAdId('HMS_INTERSTITIAL_ID', HMS_TEST_INTERSTITIAL_ID)
+def HMS_INTERSTITIAL_ID = hmsAdId('HMS_INTERSTITIAL_ID', 'f0c9dmf00p')
 
 android {
     namespace 'org.bumbumapps.musicplayer'
