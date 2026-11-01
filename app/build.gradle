@@ -7,6 +7,15 @@ if (file('google-services.json').exists()) {
     apply plugin: 'com.google.firebase.crashlytics'
 }
 
+// Huawei Ads (Petal) slot IDs for the AppGallery build: -PHMS_INTERSTITIAL_ID=... / ads.properties.
+// Until the real slots are set the hms build falls back to Huawei's public test slots.
+def hmsAdsProps = new Properties()
+def hmsAdsPropsFile = rootProject.file('ads.properties')
+if (hmsAdsPropsFile.exists()) hmsAdsPropsFile.withInputStream { hmsAdsProps.load(it) }
+def hmsAdId = { String key, String fallback -> ((project.findProperty(key) ?: hmsAdsProps.getProperty(key)) ?: fallback).toString() }
+def HMS_TEST_INTERSTITIAL_ID = 'testb4znbuh3n2'
+def HMS_INTERSTITIAL_ID = hmsAdId('HMS_INTERSTITIAL_ID', HMS_TEST_INTERSTITIAL_ID)
+
 android {
     namespace 'org.bumbumapps.musicplayer'
     compileSdk 36
@@ -25,6 +34,19 @@ android {
         dataBinding true
         buildConfig true
         resValues true
+    }
+
+    // play = Google Play (AdMob + UMP), hms = Huawei AppGallery (Huawei Ads, no Google Mobile Services).
+    flavorDimensions = ['store']
+    productFlavors {
+        play {
+            dimension 'store'
+        }
+        hms {
+            dimension 'store'
+            resValue 'string', 'hms_interstitial_id', HMS_INTERSTITIAL_ID
+            resValue 'string', 'hms_test_interstitial_id', HMS_TEST_INTERSTITIAL_ID
+        }
     }
 
     buildTypes {
@@ -89,8 +111,9 @@ dependencies {
     implementation 'com.google.android.material:material:1.13.0'
     implementation platform('com.google.firebase:firebase-bom:35.1.0')
     implementation 'com.google.firebase:firebase-crashlytics'
-    implementation 'com.google.android.gms:play-services-ads:25.5.0'
-    implementation 'com.google.android.ump:user-messaging-platform:4.0.0'
+    playImplementation 'com.google.android.gms:play-services-ads:25.5.0'
+    playImplementation 'com.google.android.ump:user-messaging-platform:4.0.0'
+    hmsImplementation 'com.huawei.hms:ads-lite:13.4.91.301'
     implementation 'com.google.android.play:review:2.0.2'
 
     testImplementation 'junit:junit:4.13.2'

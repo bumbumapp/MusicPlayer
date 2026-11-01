@@ -24,3 +24,8 @@
 
 -keep class org.bumbumapps.musicplayer.AuxioApp
 -keep class org.bumbumapps.musicplayer.settings.SettingsListFragment
+
+# Huawei Ads (hms flavor)
+-keep class com.huawei.openalliance.ad.** { *; }
+-keep class com.huawei.hms.ads.** { *; }
+-dontwarn com.huawei.**
